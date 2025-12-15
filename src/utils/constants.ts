@@ -5,7 +5,7 @@ export const IOA_CATEGORIES: Record<number, IOACategory> = {
     id: 1,
     name: 'Compensation & Benefits',
     shortName: 'Compensation',
-    description: 'Questions, concerns, issues or inquiries about the equity, appropriateness and competitiveness of employee compensation, benefits and other benefit programs.',
+    description: 'Disputes regarding staff member salaries, allowances, pension benefits, medical insurance, severance packages, and other forms of employee compensation and benefits.',
     color: '#3B82F6',
     icon: 'DollarSign',
     subcategories: ['1.a', '1.b', '1.c', '1.d', '1.e', '3.c']
@@ -14,7 +14,7 @@ export const IOA_CATEGORIES: Record<number, IOACategory> = {
     id: 2,
     name: 'Evaluative Relationships',
     shortName: 'Evaluative',
-    description: 'Questions, concerns, issues or inquiries arising between people in evaluative relationships (supervisor-employee, faculty-student).',
+    description: 'Issues arising from supervisor-employee relationships including performance evaluations, management decisions, work assignments, retaliation claims, and employment terms and conditions.',
     color: '#10B981',
     icon: 'ClipboardCheck',
     subcategories: ['2.a', '2.b', '2.c', '2.d', '2.e', '2.f', '2.g', '2.h', '2.i', '2.j', '2.k', '2.l', '2.m', '2.n', '2.o', '2.p', '2.q', '2.r', '2.s']
@@ -23,7 +23,7 @@ export const IOA_CATEGORIES: Record<number, IOACategory> = {
     id: 3,
     name: 'Peer and Colleague Relationships',
     shortName: 'Peer Relations',
-    description: 'Questions, concerns, issues or inquiries involving peers or colleagues who do not have a supervisory-employee or student-professor relationship.',
+    description: 'Conflicts and concerns between colleagues at the same organizational level, including workplace harassment, discrimination, and interpersonal disputes among peers.',
     color: '#8B5CF6',
     icon: 'Users',
     subcategories: ['3.a', '3.b', '3.d', '3.e', '3.f', '3.g', '3.h', '3.i', '3.j']
@@ -32,7 +32,7 @@ export const IOA_CATEGORIES: Record<number, IOACategory> = {
     id: 4,
     name: 'Career Progression and Development',
     shortName: 'Career',
-    description: 'Questions, concerns, issues or inquiries about administrative processes and decisions regarding entering and leaving a job, recruitment, assignment, job security, and separation.',
+    description: 'Disputes concerning recruitment, hiring, promotions, lateral moves, job reclassification, professional development opportunities, contract renewals, and separation from service.',
     color: '#F59E0B',
     icon: 'TrendingUp',
     subcategories: ['4.a', '4.b', '4.c', '4.d', '4.e', '4.f', '4.g', '4.h', '4.i', '4.j', '4.k', '4.l']
@@ -41,7 +41,7 @@ export const IOA_CATEGORIES: Record<number, IOACategory> = {
     id: 5,
     name: 'Legal, Regulatory, Financial and Compliance',
     shortName: 'Legal',
-    description: 'Questions, concerns, issues or inquiries that may create a legal risk for the organization or its members if not addressed, including issues related to waste, fraud or abuse.',
+    description: 'Legal compliance issues, regulatory violations, financial misconduct, fraud, abuse of authority, and other matters that may create legal or financial risk for the organization.',
     color: '#EF4444',
     icon: 'Scale',
     subcategories: ['5.a', '5.b', '5.c', '5.d', '5.e', '5.f', '5.g', '5.h', '5.i', '5.j']
@@ -50,7 +50,7 @@ export const IOA_CATEGORIES: Record<number, IOACategory> = {
     id: 6,
     name: 'Safety, Health, and Physical Environment',
     shortName: 'Safety',
-    description: 'Questions, concerns, issues or inquiries about Safety, Health and Infrastructure-related issues.',
+    description: 'Workplace safety concerns, occupational health issues, medical conditions affecting work, disability accommodations, and physical work environment conditions.',
     color: '#06B6D4',
     icon: 'Shield',
     subcategories: ['6.a', '6.b', '6.c', '6.d', '6.e', '6.f', '6.g', '6.h', '6.i', '6.j']
@@ -59,7 +59,7 @@ export const IOA_CATEGORIES: Record<number, IOACategory> = {
     id: 7,
     name: 'Services/Administrative Issues',
     shortName: 'Services',
-    description: 'Questions, concerns, issues or inquiries about services or administrative offices including from external parties.',
+    description: 'Problems with HR services, administrative processes, information technology systems, procurement, facilities management, and other organizational support services.',
     color: '#6366F1',
     icon: 'FileText',
     subcategories: ['7.a', '7.b', '7.c', '7.d', '7.e']
@@ -68,7 +68,7 @@ export const IOA_CATEGORIES: Record<number, IOACategory> = {
     id: 8,
     name: 'Organizational, Strategic, and Mission Related',
     shortName: 'Organizational',
-    description: 'Questions, concerns, issues or inquiries that relate to the whole or some part of an organization.',
+    description: 'Concerns about organizational policies, restructuring, budget decisions, resource allocation, strategic direction, departmental management, and institutional mission.',
     color: '#EC4899',
     icon: 'Target',
     subcategories: ['8.a', '8.b', '8.c', '8.d', '8.e', '8.f', '8.g', '8.h', '8.i', '8.j', '8.k']
@@ -77,7 +77,7 @@ export const IOA_CATEGORIES: Record<number, IOACategory> = {
     id: 9,
     name: 'Values, Ethics, and Standards',
     shortName: 'Ethics',
-    description: 'Questions, concerns, issues or inquiries about the fairness of organizational values, ethics, and/or standards, the application of related policies and/or procedures.',
+    description: 'Violations of code of conduct, ethical breaches, conflicts of interest, professional standards violations, disciplinary actions, and concerns about fairness in applying organizational policies.',
     color: '#14B8A6',
     icon: 'Heart',
     subcategories: ['9.a', '9.b', '9.c', '9.d', '9.e']
