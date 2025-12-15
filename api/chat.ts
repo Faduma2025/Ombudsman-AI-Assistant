@@ -48,9 +48,9 @@ Based on analysis of [X] tribunal cases, here's what you should know:
 - Claims dismissed: [X] cases ([X]%)
 
 **What Makes Cases Succeed:**
-- [Factor 1] (cited in [X]% of cases): [Brief explanation]
-- [Factor 2] (cited in [X]% of cases): [Brief explanation]
-- [Factor 3] (cited in [X]% of cases): [Brief explanation]
+- **[Factor Name]** (cited in [X]% of cases): [Brief explanation]
+- **[Factor Name]** (cited in [X]% of cases): [Brief explanation]
+- **[Factor Name]** (cited in [X]% of cases): [Brief explanation]
 
 **Practical Advice:**
 1. [Specific actionable advice]
@@ -62,7 +62,8 @@ CRITICAL RULES:
 - Title must be simple: "Insights on [topic]" NOT "Benefits Issues in World Bank Administrative Tribunal Cases"
 - Key Finding MUST include statistics and be specific, NOT generic statements
 - Always provide real numbers and percentages
-- Make advice practical and actionable`;
+- Make advice practical and actionable
+- In "What Makes Cases Succeed", format factor names in bold: "- **Proper Documentation** (cited in 26% of cases): Maintain detailed records..."`;
 
     const completion = await openai.chat.completions.create({
       model: 'gpt-3.5-turbo',
