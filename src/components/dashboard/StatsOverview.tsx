@@ -32,9 +32,9 @@ export const StatsOverview: React.FC = () => {
 
       <Card>
         <div className="text-center">
-          <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Applicant Wins</p>
-          <p className="text-3xl font-bold text-green-600 mt-2">{stats.applicantWins}</p>
-          <p className="text-xs text-gray-500 mt-1">{stats.applicantWinRate}%</p>
+          <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Applicant Favorable</p>
+          <p className="text-3xl font-bold text-green-600 mt-2">{stats.applicantWins + stats.partialWins}</p>
+          <p className="text-xs text-gray-500 mt-1">{stats.applicantWinRate}% (Full + Partial)</p>
         </div>
       </Card>
 
@@ -48,11 +48,17 @@ export const StatsOverview: React.FC = () => {
 
       <Card>
         <div className="text-center">
-          <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Partial Wins</p>
-          <p className="text-3xl font-bold text-yellow-600 mt-2">{stats.partialWins}</p>
-          <p className="text-xs text-gray-500 mt-1">
-            {stats.totalCases > 0 ? ((stats.partialWins / stats.totalCases) * 100).toFixed(1) : 0}%
-          </p>
+          <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Breakdown</p>
+          <div className="mt-2 text-sm text-gray-700 dark:text-gray-300">
+            <div className="flex justify-between">
+              <span>Full Applicant:</span>
+              <span className="font-semibold">{stats.applicantWins}</span>
+            </div>
+            <div className="flex justify-between">
+              <span>Partial:</span>
+              <span className="font-semibold">{stats.partialWins}</span>
+            </div>
+          </div>
         </div>
       </Card>
     </div>
