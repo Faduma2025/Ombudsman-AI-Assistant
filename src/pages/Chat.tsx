@@ -9,6 +9,14 @@ export const Chat: React.FC = () => {
   const { messages, isLoading, sendMessage, clearChat } = useChat();
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
+  // Initial welcome message
+  const welcomeMessage = {
+    id: 'welcome',
+    role: 'assistant' as const,
+    content: "Hello! I'm your Ombudsman Assistant. How can I help you today?",
+    timestamp: new Date()
+  };
+
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -18,14 +26,14 @@ export const Chat: React.FC = () => {
   }, [messages]);
 
   return (
-    <div className="h-[calc(100vh-8rem)] flex flex-col">
-      <div className="mb-4 flex justify-between items-center">
+    <div className="flex flex-col h-full max-w-5xl mx-auto">
+      <div className="mb-6 flex justify-between items-center">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-1">
             AI Chat Assistant
           </h1>
-          <p className="text-gray-600 dark:text-gray-400">
-            Ask questions about tribunal cases and get AI-powered insights
+          <p className="text-sm text-gray-600 dark:text-gray-400">
+            Get advice based on 199 tribunal cases
           </p>
         </div>
         {messages.length > 0 && (
@@ -42,8 +50,13 @@ export const Chat: React.FC = () => {
         <SuggestedQuestions onSelect={sendMessage} />
       )}
 
-      <div className="flex-1 bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden flex flex-col min-h-[400px]">
-        <div className="flex-1 overflow-y-auto p-6 hide-scrollbar min-h-[300px]">
+      <div className="flex-1 bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden flex flex-col" style={{ height: '600px' }}>
+        <div className="flex-1 overflow-y-auto p-6 hide-scrollbar">
+          {/* Show welcome message if no user messages */}
+          {messages.length === 0 && (
+            <ChatMessageComponent message={welcomeMessage} />
+          )}
+
           {messages.map((message) => (
             <ChatMessageComponent key={message.id} message={message} />
           ))}
