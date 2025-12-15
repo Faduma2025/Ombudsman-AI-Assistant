@@ -31,7 +31,7 @@ export const ChatInput: React.FC<ChatInputProps> = ({ onSend, disabled = false }
           onKeyDown={handleKeyDown}
           placeholder="Hello! I'm your Ombudsman Assistant. How can I help you today?"
           disabled={disabled}
-          className="flex-1 resize-none border border-gray-300 dark:border-gray-600 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
+          className="flex-1 resize-none border border-gray-300 dark:border-gray-600 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
           rows={3}
         />
         <button
