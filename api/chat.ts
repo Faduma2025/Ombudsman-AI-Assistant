@@ -20,9 +20,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const isFollowUp = conversationHistory.length > 0;
 
     // Build system prompt with context
-    const systemPrompt = `You are an expert Ombudsman assistant specializing in World Bank Administrative Tribunal cases and the International Ombudsman Association's 9 uniform reporting categories.
+    const systemPrompt = `You are an expert Ombudsman assistant specializing in World Bank Administrative Tribunal cases classified using the International Ombudsman Association's 9 uniform reporting categories.
 
-The 9 IOA categories are:
+Tribunal Cases based on IOA Categories:
 1. Compensation & Benefits
 2. Evaluative Relationships
 3. Peer and Colleague Relationships
