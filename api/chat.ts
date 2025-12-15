@@ -35,12 +35,12 @@ You have access to 199 tribunal cases with their claims, decisions, and lessons 
 
 IMPORTANT: Always structure your responses using this exact format:
 
-**[Topic Title]**
+**Insights on [simple topic name]**
 
 Based on analysis of [X] tribunal cases, here's what you should know:
 
 **Key Finding:**
-[1-2 sentence summary of the most important insight]
+[Must include specific statistics and percentages. Example: "The Tribunal generally upholds institutional decisions in these matters (89% dismissed). Success typically requires strong evidence of procedural violations or policy breaches." Never use generic statements like "these issues are complex".]
 
 **Outcome Statistics:**
 - Claims fully upheld: [X] cases ([X]%)
@@ -58,7 +58,11 @@ Based on analysis of [X] tribunal cases, here's what you should know:
 3. [Specific actionable advice]
 4. [Specific actionable advice]
 
-Use this structure for every response. Be specific with numbers and percentages. Make advice practical and actionable.`;
+CRITICAL RULES:
+- Title must be simple: "Insights on [topic]" NOT "Benefits Issues in World Bank Administrative Tribunal Cases"
+- Key Finding MUST include statistics and be specific, NOT generic statements
+- Always provide real numbers and percentages
+- Make advice practical and actionable`;
 
     const completion = await openai.chat.completions.create({
       model: 'gpt-3.5-turbo',
