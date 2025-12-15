@@ -85,27 +85,51 @@ export const CategoryDetail: React.FC = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
         <Card className="md:col-span-2">
-          <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-3">
+          <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-4">
             Ruling Distribution
           </h3>
-          <ResponsiveContainer width="100%" height={220}>
+          <ResponsiveContainer width="100%" height={280}>
             <PieChart>
               <Pie
                 data={pieData}
                 cx="50%"
                 cy="50%"
-                labelLine={false}
-                label={({ percent }) => `${(percent * 100).toFixed(0)}%`}
-                outerRadius={70}
+                labelLine={true}
+                label={({ name, percent, value }) => `${name}: ${value} (${(percent * 100).toFixed(0)}%)`}
+                outerRadius={90}
+                innerRadius={40}
                 fill="#8884d8"
                 dataKey="value"
+                paddingAngle={2}
               >
                 {pieData.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={entry.color} />
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={entry.color}
+                    stroke="#fff"
+                    strokeWidth={2}
+                  />
                 ))}
               </Pie>
-              <Tooltip />
-              <Legend />
+              <Tooltip
+                contentStyle={{
+                  backgroundColor: 'rgba(255, 255, 255, 0.95)',
+                  border: '1px solid #ccc',
+                  borderRadius: '8px',
+                  padding: '10px',
+                  fontSize: '14px'
+                }}
+                formatter={(value: number, name: string) => [`${value} cases`, name]}
+              />
+              <Legend
+                verticalAlign="bottom"
+                height={36}
+                iconType="circle"
+                wrapperStyle={{
+                  paddingTop: '20px',
+                  fontSize: '14px'
+                }}
+              />
             </PieChart>
           </ResponsiveContainer>
         </Card>
