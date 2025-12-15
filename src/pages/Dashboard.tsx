@@ -34,7 +34,7 @@ export const Dashboard: React.FC = () => {
 
       <div className="mb-6">
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-          IOA Categories
+          Tribunal Cases based on IOA Categories
         </h2>
       </div>
 
