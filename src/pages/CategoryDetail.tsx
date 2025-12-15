@@ -96,8 +96,8 @@ export const CategoryDetail: React.FC = () => {
                 cy="50%"
                 labelLine={false}
                 label={({ percent }) => {
-                  const percentage = (percent * 100).toFixed(0);
-                  return percentage > 5 ? `${percentage}%` : '';
+                  const percentageValue = percent * 100;
+                  return percentageValue > 5 ? `${percentageValue.toFixed(0)}%` : '';
                 }}
                 outerRadius={90}
                 innerRadius={40}
