@@ -46,39 +46,26 @@ export const Chat: React.FC = () => {
         <div className="flex-1 overflow-y-auto p-6 hide-scrollbar">
           {messages.length === 0 && (
             <div className="flex items-center justify-center h-full text-center px-4">
-              <div className="max-w-2xl">
-                <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
-                  <span className="text-4xl">🤖</span>
+              <div className="max-w-xl">
+                <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-3xl">💬</span>
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">
-                  Hi! I'm Your AI Ombudsman Assistant
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
+                  Get Advice Based on Past Cases
                 </h3>
-                <p className="text-gray-600 dark:text-gray-400 mb-6 text-lg">
-                  I can help you explore tribunal cases, understand patterns, and provide insights based on 199 documented decisions.
+                <p className="text-gray-600 dark:text-gray-400 mb-6">
+                  Share your case or situation, and I'll provide advice based on insights from 199 tribunal cases.
                 </p>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-left mb-6">
-                  <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg border border-blue-200 dark:border-blue-800">
-                    <div className="text-blue-600 dark:text-blue-400 font-semibold mb-1">📊 Analyze Patterns</div>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">Ask about case trends, outcomes, and statistics</p>
-                  </div>
-                  <div className="bg-green-50 dark:bg-green-900/20 p-4 rounded-lg border border-green-200 dark:border-green-800">
-                    <div className="text-green-600 dark:text-green-400 font-semibold mb-1">🏛️ Explore Categories</div>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">Learn about the 9 IOA classification categories</p>
-                  </div>
-                  <div className="bg-purple-50 dark:bg-purple-900/20 p-4 rounded-lg border border-purple-200 dark:border-purple-800">
-                    <div className="text-purple-600 dark:text-purple-400 font-semibold mb-1">💡 Get Insights</div>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">Discover lessons learned from past cases</p>
-                  </div>
-                  <div className="bg-orange-50 dark:bg-orange-900/20 p-4 rounded-lg border border-orange-200 dark:border-orange-800">
-                    <div className="text-orange-600 dark:text-orange-400 font-semibold mb-1">⚖️ Understand Outcomes</div>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">Compare ruling patterns and success rates</p>
-                  </div>
+                <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700 rounded-lg p-4 text-left">
+                  <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">
+                    <strong>How it works:</strong>
+                  </p>
+                  <ul className="text-sm text-gray-600 dark:text-gray-400 space-y-1">
+                    <li>• Describe your case or concern</li>
+                    <li>• I'll analyze similar past tribunal cases</li>
+                    <li>• Get personalized advice and insights</li>
+                  </ul>
                 </div>
-
-                <p className="text-sm text-gray-500 dark:text-gray-500 italic">
-                  💡 Tip: Start by selecting a suggested question below or type your own question!
-                </p>
               </div>
             </div>
           )}

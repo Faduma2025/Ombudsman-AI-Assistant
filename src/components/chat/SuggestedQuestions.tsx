@@ -5,12 +5,12 @@ interface SuggestedQuestionsProps {
 }
 
 const SUGGESTED_QUESTIONS = [
-  "What are the most common issues in Compensation & Benefits cases?",
-  "What's the typical outcome for promotion disputes?",
-  "Explain the difference between Evaluative and Peer Relationships categories",
-  "What lessons can be learned from retaliation cases?",
-  "What percentage of cases favor the applicant?",
-  "Tell me about disciplinary action cases"
+  "I have a compensation dispute - what should I know?",
+  "I'm facing a performance evaluation issue - what are typical outcomes?",
+  "My promotion was denied - how can I approach this?",
+  "I believe I'm experiencing retaliation - what do past cases show?",
+  "I'm dealing with a disciplinary action - what advice can you give?",
+  "How should I prepare my case for the tribunal?"
 ];
 
 export const SuggestedQuestions: React.FC<SuggestedQuestionsProps> = ({ onSelect }) => {
