@@ -43,7 +43,7 @@ export const Chat: React.FC = () => {
       )}
 
       <div className="flex-1 bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden flex flex-col">
-        <div className="flex-1 overflow-y-auto p-6">
+        <div className="flex-1 overflow-y-auto p-6 hide-scrollbar">
           {messages.length === 0 && (
             <div className="flex items-center justify-center h-full text-center px-4">
               <div className="max-w-2xl">
