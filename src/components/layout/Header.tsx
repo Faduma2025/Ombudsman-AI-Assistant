@@ -16,7 +16,7 @@ export const Header: React.FC = () => {
                   Ombudsman AI Assistant
                 </h1>
                 <p className="text-xs text-gray-500 dark:text-gray-400">
-                  World Bank Tribunal Cases
+                  Tribunal Case Analysis
                 </p>
               </div>
             </Link>
