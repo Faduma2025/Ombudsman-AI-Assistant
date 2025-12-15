@@ -123,7 +123,11 @@ export const CategoryDetail: React.FC = () => {
                   fontSize: '14px',
                   fontWeight: 600
                 }}
-                formatter={(value: number, name: string) => [`${value} cases (${((value / pieData.reduce((sum, entry) => sum + entry.value, 0)) * 100).toFixed(1)}%)`, name]}
+                formatter={(value: number) => {
+                  const total = pieData.reduce((sum, entry) => sum + entry.value, 0);
+                  const percentage = ((value / total) * 100).toFixed(1);
+                  return `${value} cases (${percentage}%)`;
+                }}
               />
               <Legend
                 verticalAlign="bottom"
