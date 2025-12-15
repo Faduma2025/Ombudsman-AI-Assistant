@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useCategories } from '../hooks/useCategories';
 import { useCases } from '../context/CasesContext';
@@ -11,6 +11,8 @@ export const CategoryDetail: React.FC = () => {
   const { categoryId } = useParams<{ categoryId: string }>();
   const { getCategoryStats, loading } = useCategories();
   const { cases } = useCases();
+  const [currentPage, setCurrentPage] = useState(1);
+  const casesPerPage = 5;
 
   const categoryIdNum = categoryId ? parseInt(categoryId) : undefined;
   const stats = categoryIdNum ? getCategoryStats(categoryIdNum) : undefined;
@@ -19,6 +21,17 @@ export const CategoryDetail: React.FC = () => {
     if (!categoryIdNum) return [];
     return cases.filter(c => c.ioaCategory.id === categoryIdNum);
   }, [cases, categoryIdNum]);
+
+  // Calculate pagination
+  const totalPages = Math.ceil(categoryCases.length / casesPerPage);
+  const startIndex = (currentPage - 1) * casesPerPage;
+  const endIndex = startIndex + casesPerPage;
+  const currentCases = categoryCases.slice(startIndex, endIndex);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+  };
 
   const pieData = useMemo(() => {
     if (!stats) return [];
@@ -142,8 +155,8 @@ export const CategoryDetail: React.FC = () => {
         <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
           All Cases in This Category ({categoryCases.length})
         </h3>
-        <div className="space-y-4">
-          {categoryCases.map((case_) => (
+        <div className="space-y-4 mb-6">
+          {currentCases.map((case_) => (
             <div
               key={case_.caseNo}
               className="border-l-4 pl-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
@@ -167,6 +180,36 @@ export const CategoryDetail: React.FC = () => {
             </div>
           ))}
         </div>
+
+        {/* Pagination Controls */}
+        {totalPages > 1 && (
+          <div className="flex items-center justify-between border-t border-gray-200 dark:border-gray-700 pt-4">
+            <button
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
+              className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            >
+              Previous
+            </button>
+
+            <div className="flex items-center space-x-2">
+              <span className="text-sm text-gray-700 dark:text-gray-300">
+                Page {currentPage} of {totalPages}
+              </span>
+              <span className="text-sm text-gray-500 dark:text-gray-400">
+                ({startIndex + 1}-{Math.min(endIndex, categoryCases.length)} of {categoryCases.length})
+              </span>
+            </div>
+
+            <button
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage === totalPages}
+              className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            >
+              Next
+            </button>
+          </div>
+        )}
       </Card>
     </div>
   );
