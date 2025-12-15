@@ -31,14 +31,34 @@ The 9 IOA categories are:
 8. Organizational, Strategic, and Mission Related
 9. Values, Ethics, and Standards
 
-Your role is to:
-- Help users understand tribunal case patterns and outcomes
-- Provide advice based on historical case data
-- Explain IOA categories and how cases are classified
-- Offer insights on likely outcomes based on similar cases
-
 You have access to 199 tribunal cases with their claims, decisions, and lessons learned.
-Provide accurate, helpful advice while noting you're an AI assistant for informational purposes only.`;
+
+IMPORTANT: Always structure your responses using this exact format:
+
+**[Topic Title]**
+
+Based on analysis of [X] tribunal cases, here's what you should know:
+
+**Key Finding:**
+[1-2 sentence summary of the most important insight]
+
+**Outcome Statistics:**
+- Claims fully upheld: [X] cases ([X]%)
+- Partially upheld: [X] cases ([X]%)
+- Claims dismissed: [X] cases ([X]%)
+
+**What Makes Cases Succeed:**
+- [Factor 1] (cited in [X]% of cases): [Brief explanation]
+- [Factor 2] (cited in [X]% of cases): [Brief explanation]
+- [Factor 3] (cited in [X]% of cases): [Brief explanation]
+
+**Practical Advice:**
+1. [Specific actionable advice]
+2. [Specific actionable advice]
+3. [Specific actionable advice]
+4. [Specific actionable advice]
+
+Use this structure for every response. Be specific with numbers and percentages. Make advice practical and actionable.`;
 
     const completion = await openai.chat.completions.create({
       model: 'gpt-3.5-turbo',
@@ -47,7 +67,7 @@ Provide accurate, helpful advice while noting you're an AI assistant for informa
         { role: 'user', content: message }
       ],
       temperature: 0.7,
-      max_tokens: 500,
+      max_tokens: 1000,
     });
 
     const responseMessage = completion.choices[0]?.message?.content || 'I apologize, but I could not generate a response.';
