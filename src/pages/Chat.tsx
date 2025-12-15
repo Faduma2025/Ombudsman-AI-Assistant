@@ -42,8 +42,8 @@ export const Chat: React.FC = () => {
         <SuggestedQuestions onSelect={sendMessage} />
       )}
 
-      <div className="flex-1 bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden flex flex-col">
-        <div className="flex-1 overflow-y-auto p-6 hide-scrollbar">
+      <div className="flex-1 bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden flex flex-col min-h-[400px]">
+        <div className="flex-1 overflow-y-auto p-6 hide-scrollbar min-h-[300px]">
           {messages.map((message) => (
             <ChatMessageComponent key={message.id} message={message} />
           ))}
