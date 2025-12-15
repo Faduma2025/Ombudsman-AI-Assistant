@@ -94,8 +94,11 @@ export const CategoryDetail: React.FC = () => {
                 data={pieData}
                 cx="50%"
                 cy="50%"
-                labelLine={true}
-                label={({ name, percent, value }) => `${name}: ${value} (${(percent * 100).toFixed(0)}%)`}
+                labelLine={false}
+                label={({ percent }) => {
+                  const percentage = (percent * 100).toFixed(0);
+                  return percentage > 5 ? `${percentage}%` : '';
+                }}
                 outerRadius={90}
                 innerRadius={40}
                 fill="#8884d8"
@@ -117,9 +120,10 @@ export const CategoryDetail: React.FC = () => {
                   border: '1px solid #ccc',
                   borderRadius: '8px',
                   padding: '10px',
-                  fontSize: '14px'
+                  fontSize: '14px',
+                  fontWeight: 600
                 }}
-                formatter={(value: number, name: string) => [`${value} cases`, name]}
+                formatter={(value: number, name: string) => [`${value} cases (${((value / pieData.reduce((sum, entry) => sum + entry.value, 0)) * 100).toFixed(1)}%)`, name]}
               />
               <Legend
                 verticalAlign="bottom"
@@ -127,7 +131,8 @@ export const CategoryDetail: React.FC = () => {
                 iconType="circle"
                 wrapperStyle={{
                   paddingTop: '20px',
-                  fontSize: '14px'
+                  fontSize: '13px',
+                  fontWeight: 500
                 }}
               />
             </PieChart>
