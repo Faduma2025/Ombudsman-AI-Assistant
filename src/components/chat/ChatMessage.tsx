@@ -20,11 +20,6 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({ message }) => {
         )}
       >
         <div className="flex items-start">
-          {!isUser && (
-            <div className="w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center mr-3">
-              <span className="text-blue-600 dark:text-blue-300 font-bold text-xs">Compass</span>
-            </div>
-          )}
           <div className="flex-1">
             <p className="text-sm whitespace-pre-wrap">{message.content}</p>
             {message.relatedCases && message.relatedCases.length > 0 && (

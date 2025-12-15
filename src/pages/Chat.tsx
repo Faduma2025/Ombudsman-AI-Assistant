@@ -9,14 +9,6 @@ export const Chat: React.FC = () => {
   const { messages, isLoading, sendMessage, clearChat } = useChat();
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // Initial welcome message
-  const welcomeMessage = {
-    id: 'welcome',
-    role: 'assistant' as const,
-    content: "Hello! I'm your Ombudsman Assistant. How can I help you today?",
-    timestamp: new Date()
-  };
-
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -52,11 +44,6 @@ export const Chat: React.FC = () => {
 
       <div className="flex-1 bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden flex flex-col" style={{ height: '600px' }}>
         <div className="flex-1 overflow-y-auto p-6 hide-scrollbar">
-          {/* Show welcome message if no user messages */}
-          {messages.length === 0 && (
-            <ChatMessageComponent message={welcomeMessage} />
-          )}
-
           {messages.map((message) => (
             <ChatMessageComponent key={message.id} message={message} />
           ))}

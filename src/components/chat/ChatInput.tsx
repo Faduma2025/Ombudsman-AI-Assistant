@@ -29,7 +29,7 @@ export const ChatInput: React.FC<ChatInputProps> = ({ onSend, disabled = false }
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
-          placeholder="Ask about tribunal cases, IOA categories, or patterns..."
+          placeholder="Hello! I'm your Ombudsman Assistant. How can I help you today?"
           disabled={disabled}
           className="flex-1 resize-none border border-gray-300 dark:border-gray-600 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
           rows={3}
