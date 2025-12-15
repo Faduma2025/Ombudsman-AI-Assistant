@@ -12,6 +12,21 @@ interface CsvRow {
 }
 
 /**
+ * Cleans up text by replacing encoding issues with proper characters
+ */
+const cleanText = (text: string): string => {
+  if (!text) return text;
+  return text
+    .replace(/�/g, "'")  // Replace � with apostrophe
+    .replace(/â€™/g, "'")  // Replace smart apostrophe encoding issue
+    .replace(/â€"/g, "–")  // Replace en-dash encoding issue
+    .replace(/â€"/g, "—")  // Replace em-dash encoding issue
+    .replace(/â€œ/g, '"')  // Replace opening quote encoding issue
+    .replace(/â€/g, '"')   // Replace closing quote encoding issue
+    .trim();
+};
+
+/**
  * Parses the tribunal cases CSV file and returns typed case objects
  */
 export const parseTribunalCases = async (): Promise<TribunalCase[]> => {
@@ -31,10 +46,10 @@ export const parseTribunalCases = async (): Promise<TribunalCase[]> => {
               const ioaCategory = mapCsvCategoryToIOA(csvCategory);
 
               return {
-                caseNo: row['Case No.'],
-                claim: row['Claim of the Applicant'],
-                decision: row['Decision'],
-                lessonsLearned: row['Lessons Learned'],
+                caseNo: cleanText(row['Case No.']),
+                claim: cleanText(row['Claim of the Applicant']),
+                decision: cleanText(row['Decision']),
+                lessonsLearned: cleanText(row['Lessons Learned']),
                 csvCategory: csvCategory,
                 ioaCategory: ioaCategory,
                 rulingInFavorOf: normalizeRuling(row['Ruling in Favor of'])
