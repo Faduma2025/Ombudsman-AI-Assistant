@@ -48,15 +48,28 @@ export const StatsOverview: React.FC = () => {
 
       <Card>
         <div className="text-center">
-          <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Breakdown</p>
-          <div className="mt-2 text-sm text-gray-700 dark:text-gray-300">
-            <div className="flex justify-between">
-              <span>Full Applicant:</span>
+          <p className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-3">Ruling Breakdown</p>
+          <div className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+            <div className="flex justify-between items-center">
+              <span className="flex items-center">
+                <span className="w-3 h-3 bg-green-500 rounded-full mr-2"></span>
+                Full Applicant:
+              </span>
               <span className="font-semibold">{stats.applicantWins}</span>
             </div>
-            <div className="flex justify-between">
-              <span>Partial:</span>
+            <div className="flex justify-between items-center">
+              <span className="flex items-center">
+                <span className="w-3 h-3 bg-yellow-500 rounded-full mr-2"></span>
+                Partial:
+              </span>
               <span className="font-semibold">{stats.partialWins}</span>
+            </div>
+            <div className="flex justify-between items-center">
+              <span className="flex items-center">
+                <span className="w-3 h-3 bg-red-500 rounded-full mr-2"></span>
+                Bank:
+              </span>
+              <span className="font-semibold">{stats.bankWins}</span>
             </div>
           </div>
         </div>
