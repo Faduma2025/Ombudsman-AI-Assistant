@@ -22,8 +22,15 @@ export const useChat = () => {
     setError(null);
 
     try {
+      // Include conversation history for context
+      const conversationHistory = messages.map(msg => ({
+        role: msg.role,
+        content: msg.content
+      }));
+
       const request: ChatRequest = {
-        message: content
+        message: content,
+        conversationHistory
       };
 
       const response = await fetch('/api/chat', {

@@ -11,11 +11,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
-    const { message, context } = req.body;
+    const { message, context, conversationHistory = [] } = req.body;
 
     if (!message) {
       return res.status(400).json({ error: 'Message is required' });
     }
+
+    const isFollowUp = conversationHistory.length > 0;
 
     // Build system prompt with context
     const systemPrompt = `You are an expert Ombudsman assistant specializing in World Bank Administrative Tribunal cases and the International Ombudsman Association's 9 uniform reporting categories.
@@ -58,19 +60,37 @@ Based on analysis of [X] tribunal cases, here's what you should know:
 3. [Specific actionable advice]
 4. [Specific actionable advice]
 
-CRITICAL RULES:
+CRITICAL RULES FOR INITIAL QUESTIONS:
 - Title must be simple: "Insights on [topic]" NOT "Benefits Issues in World Bank Administrative Tribunal Cases"
 - Key Finding MUST include statistics and be specific, NOT generic statements
 - Always provide real numbers and percentages
 - Make advice practical and actionable
-- In "What Makes Cases Succeed", format factor names in bold: "- **Proper Documentation** (cited in 26% of cases): Maintain detailed records..."`;
+- In "What Makes Cases Succeed", format factor names in bold: "- **Proper Documentation** (cited in 26% of cases): Maintain detailed records..."
+
+CRITICAL RULES FOR FOLLOW-UP QUESTIONS:
+- Do NOT repeat the structured format
+- Provide conversational, personalized responses based on the previous conversation
+- Reference what was discussed earlier
+- Give specific, actionable next steps
+- Be natural and supportive
+- Example: If user asks about chances with documents, respond like: "That's a good start! Having all your documents significantly improves your chances. Based on the patterns, cases with complete documentation have about 40% higher success rates. I'd recommend: 1) Review your documents to highlight any deviations from standard procedures, 2) Seek advice from an HR representative or legal advisor before starting the formal process, 3) Look for any inconsistencies in how your case was handled compared to similar situations."`;
+
+    // Build messages array with conversation history
+    const messages: Array<{ role: 'system' | 'user' | 'assistant'; content: string }> = [
+      { role: 'system', content: systemPrompt }
+    ];
+
+    // Add conversation history if it exists
+    conversationHistory.forEach((msg: { role: 'user' | 'assistant'; content: string }) => {
+      messages.push({ role: msg.role, content: msg.content });
+    });
+
+    // Add current message
+    messages.push({ role: 'user', content: message });
 
     const completion = await openai.chat.completions.create({
       model: 'gpt-3.5-turbo',
-      messages: [
-        { role: 'system', content: systemPrompt },
-        { role: 'user', content: message }
-      ],
+      messages: messages,
       temperature: 0.7,
       max_tokens: 1000,
     });

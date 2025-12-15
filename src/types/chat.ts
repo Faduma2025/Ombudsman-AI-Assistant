@@ -14,6 +14,10 @@ export interface ChatContext {
 export interface ChatRequest {
   message: string;
   context?: ChatContext;
+  conversationHistory?: Array<{
+    role: 'user' | 'assistant';
+    content: string;
+  }>;
 }
 
 export interface ChatResponse {
