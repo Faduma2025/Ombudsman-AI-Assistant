@@ -3,9 +3,10 @@ import React, { useState, KeyboardEvent } from 'react';
 interface ChatInputProps {
   onSend: (message: string) => void;
   disabled?: boolean;
+  placeholder?: string;
 }
 
-export const ChatInput: React.FC<ChatInputProps> = ({ onSend, disabled = false }) => {
+export const ChatInput: React.FC<ChatInputProps> = ({ onSend, disabled = false, placeholder = "Type your question..." }) => {
   const [input, setInput] = useState('');
 
   const handleSend = () => {
@@ -29,7 +30,7 @@ export const ChatInput: React.FC<ChatInputProps> = ({ onSend, disabled = false }
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
-          placeholder="Hello! I'm your Ombudsman Assistant. How can I help you today?"
+          placeholder={placeholder}
           disabled={disabled}
           className="flex-1 resize-none border border-gray-300 dark:border-gray-600 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
           rows={3}

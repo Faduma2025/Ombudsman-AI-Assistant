@@ -59,7 +59,14 @@ export const Chat: React.FC = () => {
           <div ref={messagesEndRef} />
         </div>
 
-        <ChatInput onSend={sendMessage} disabled={isLoading} />
+        <ChatInput
+          onSend={sendMessage}
+          disabled={isLoading}
+          placeholder={messages.length === 0
+            ? "Hello! I'm your Ombudsman Assistant. How can I help you today?"
+            : "Have another question? I'm here to help with more insights..."
+          }
+        />
       </div>
     </div>
   );
