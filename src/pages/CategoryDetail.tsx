@@ -70,20 +70,20 @@ export const CategoryDetail: React.FC = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-        <Card>
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <Card className="md:col-span-2">
+          <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-3">
             Ruling Distribution
           </h3>
-          <ResponsiveContainer width="100%" height={300}>
+          <ResponsiveContainer width="100%" height={220}>
             <PieChart>
               <Pie
                 data={pieData}
                 cx="50%"
                 cy="50%"
                 labelLine={false}
-                label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
-                outerRadius={80}
+                label={({ name, percent }) => `${(percent * 100).toFixed(0)}%`}
+                outerRadius={70}
                 fill="#8884d8"
                 dataKey="value"
               >
@@ -98,24 +98,24 @@ export const CategoryDetail: React.FC = () => {
         </Card>
 
         <Card>
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-            Key Statistics
+          <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-3">
+            Quick Stats
           </h3>
-          <div className="space-y-4">
-            <div>
-              <p className="text-sm text-gray-600 dark:text-gray-400">Total Cases</p>
-              <p className="text-2xl font-bold text-gray-900 dark:text-white">{stats.totalCases}</p>
+          <div className="space-y-3">
+            <div className="flex justify-between items-center">
+              <p className="text-xs text-gray-600 dark:text-gray-400">Total</p>
+              <p className="text-xl font-bold text-gray-900 dark:text-white">{stats.totalCases}</p>
             </div>
-            <div>
-              <p className="text-sm text-gray-600 dark:text-gray-400">Applicant Win Rate</p>
-              <p className="text-2xl font-bold text-green-600">
-                {stats.totalCases > 0 ? ((stats.applicantWins + stats.partialWins) / stats.totalCases * 100).toFixed(1) : 0}%
+            <div className="flex justify-between items-center">
+              <p className="text-xs text-gray-600 dark:text-gray-400">Applicant</p>
+              <p className="text-xl font-bold text-green-600">
+                {stats.totalCases > 0 ? ((stats.applicantWins + stats.partialWins) / stats.totalCases * 100).toFixed(0) : 0}%
               </p>
             </div>
-            <div>
-              <p className="text-sm text-gray-600 dark:text-gray-400">Bank Win Rate</p>
-              <p className="text-2xl font-bold text-red-600">
-                {stats.totalCases > 0 ? (stats.bankWins / stats.totalCases * 100).toFixed(1) : 0}%
+            <div className="flex justify-between items-center">
+              <p className="text-xs text-gray-600 dark:text-gray-400">Bank</p>
+              <p className="text-xl font-bold text-red-600">
+                {stats.totalCases > 0 ? (stats.bankWins / stats.totalCases * 100).toFixed(0) : 0}%
               </p>
             </div>
           </div>
