@@ -11,13 +11,26 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
-    const { message, context, conversationHistory = [] } = req.body;
+    const { message, casesData, conversationHistory = [] } = req.body;
 
     if (!message) {
       return res.status(400).json({ error: 'Message is required' });
     }
 
     const isFollowUp = conversationHistory.length > 0;
+
+    // Format cases data for AI context
+    let casesContext = '';
+    if (casesData && Array.isArray(casesData) && casesData.length > 0) {
+      casesContext = `\n\nYou have access to the following ${casesData.length} tribunal cases:\n\n`;
+      casesData.forEach((c: any) => {
+        casesContext += `Case ${c.caseNo}: ${c.claim}\n`;
+        casesContext += `IOA Category: ${c.ioaCategory?.name || c.csvCategory}\n`;
+        casesContext += `Decision: ${c.decision}\n`;
+        casesContext += `Ruling: ${c.rulingInFavorOf}\n`;
+        casesContext += `Lessons: ${c.lessonsLearned}\n\n`;
+      });
+    }
 
     // Build system prompt with context
     const systemPrompt = `You are an expert Ombudsman assistant specializing in World Bank Administrative Tribunal cases classified using the International Ombudsman Association's 9 uniform reporting categories.
@@ -103,7 +116,13 @@ SPECIAL HANDLING FOR CONVERSATIONAL CLOSINGS:
 - When user says "Thank you", "Thanks", "Thank you so much", etc., respond briefly and warmly
 - Keep it short: "You're welcome! I'm here if you need anything else." or "You're welcome! Feel free to reach out anytime."
 - Do NOT give long formal statements or re-explain what you can do
-- When user says "Goodbye", "Bye", etc., respond briefly: "Take care! Best of luck with your case." or "Goodbye! Wishing you the best."`;
+- When user says "Goodbye", "Bye", etc., respond briefly: "Take care! Best of luck with your case." or "Goodbye! Wishing you the best."
+
+IMPORTANT: When asked about general concerns (like "will I be viewed as a troublemaker"), provide supportive, balanced advice based on the tribunal case patterns. Focus on:
+- The importance of following proper procedures
+- The value of documentation and formal channels
+- Statistics showing that following proper processes is protected
+- Reassurance that legitimate concerns raised through appropriate channels are respected${casesContext}`;
 
     // Build messages array with conversation history
     const messages: Array<{ role: 'system' | 'user' | 'assistant'; content: string }> = [

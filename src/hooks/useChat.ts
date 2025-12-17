@@ -1,7 +1,12 @@
 import { useState, useCallback } from 'react';
 import { ChatMessage, ChatRequest, ChatResponse } from '../types/chat';
+import { TribunalCase } from '../types/case';
 
-export const useChat = () => {
+interface UseChatProps {
+  cases?: TribunalCase[];
+}
+
+export const useChat = (props?: UseChatProps) => {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -22,6 +27,37 @@ export const useChat = () => {
     setError(null);
 
     try {
+      // Filter cases based on the question to reduce token usage
+      const filterRelevantCases = (question: string, allCases: TribunalCase[]) => {
+        const lowerQuestion = question.toLowerCase();
+
+        // Keywords to filter cases
+        const keywords = [
+          'compensation', 'benefits', 'pension', 'salary', 'pay',
+          'promotion', 'career', 'development',
+          'discrimination', 'harassment', 'retaliation',
+          'performance', 'evaluation', 'appraisal',
+          'disciplinary', 'misconduct', 'termination',
+          'contract', 'renewal', 'employment'
+        ];
+
+        // Check if question mentions specific categories
+        const matchedKeywords = keywords.filter(kw => lowerQuestion.includes(kw));
+
+        // If specific keywords found, filter cases; otherwise send all (for general questions)
+        if (matchedKeywords.length > 0) {
+          return allCases.filter(c => {
+            const caseText = `${c.claim} ${c.decision} ${c.lessonsLearned} ${c.csvCategory}`.toLowerCase();
+            return matchedKeywords.some(kw => caseText.includes(kw));
+          });
+        }
+
+        // For general questions, send all cases
+        return allCases;
+      };
+
+      const relevantCases = props?.cases ? filterRelevantCases(content, props.cases) : [];
+
       // Include conversation history for context
       const conversationHistory = messages.map(msg => ({
         role: msg.role,
@@ -30,7 +66,8 @@ export const useChat = () => {
 
       const request: ChatRequest = {
         message: content,
-        conversationHistory
+        conversationHistory,
+        casesData: relevantCases
       };
 
       const response = await fetch('/api/chat', {
@@ -73,7 +110,7 @@ export const useChat = () => {
     } finally {
       setIsLoading(false);
     }
-  }, []);
+  }, [messages, props?.cases]);
 
   const clearChat = useCallback(() => {
     setMessages([]);

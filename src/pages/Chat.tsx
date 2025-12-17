@@ -3,10 +3,12 @@ import { ChatMessage as ChatMessageComponent } from '../components/chat/ChatMess
 import { ChatInput } from '../components/chat/ChatInput';
 import { SuggestedQuestions } from '../components/chat/SuggestedQuestions';
 import { useChat } from '../hooks/useChat';
+import { useCases } from '../context/CasesContext';
 import { LoadingSpinner } from '../components/common/LoadingSpinner';
 
 export const Chat: React.FC = () => {
-  const { messages, isLoading, sendMessage, clearChat } = useChat();
+  const { cases } = useCases();
+  const { messages, isLoading, sendMessage, clearChat } = useChat({ cases });
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {

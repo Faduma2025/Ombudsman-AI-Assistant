@@ -18,6 +18,7 @@ export interface ChatRequest {
     role: 'user' | 'assistant';
     content: string;
   }>;
+  casesData?: any[]; // Tribunal cases data for AI context
 }
 
 export interface ChatResponse {
