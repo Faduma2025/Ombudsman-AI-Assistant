@@ -27,7 +27,7 @@ export const Chat: React.FC = () => {
             AI Chat Assistant
           </h1>
           <p className="text-sm text-gray-600 dark:text-gray-400">
-            Get advice based on 199 tribunal cases
+            Get advice based on tribunal cases
           </p>
         </div>
         {messages.length > 0 && (

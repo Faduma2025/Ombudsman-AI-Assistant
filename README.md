@@ -74,7 +74,7 @@ npm run dev
 │   └── chat.ts                        # Vercel serverless function for OpenAI
 ├── public/
 │   └── data/
-│       └── tribunal-cases.csv         # 199 tribunal cases
+│       └── tribunal-cases.csv         # Tribunal cases database
 ├── src/
 │   ├── components/
 │   │   ├── layout/                    # Header, Layout components

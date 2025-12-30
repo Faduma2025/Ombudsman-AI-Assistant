@@ -33,7 +33,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     }
 
     // Build system prompt with context
-    const systemPrompt = `You are an expert Ombudsman assistant specializing in World Bank Administrative Tribunal cases classified using the International Ombudsman Association's 9 uniform reporting categories.
+    const systemPrompt = `You are an expert Ombudsman assistant specializing in Administrative Tribunal cases from multilateral organizations, classified using the International Ombudsman Association's 9 uniform reporting categories.
 
 Tribunal Cases based on IOA Categories:
 1. Compensation & Benefits
@@ -46,7 +46,7 @@ Tribunal Cases based on IOA Categories:
 8. Organizational, Strategic, and Mission Related
 9. Values, Ethics, and Standards
 
-You have access to 199 tribunal cases with their claims, decisions, and lessons learned.
+You have access to tribunal cases with their claims, decisions, and lessons learned.
 
 IMPORTANT: You must NOT:
 • Investigate cases
