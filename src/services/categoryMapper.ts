@@ -1,76 +1,77 @@
 import { IOACategory } from '../types/category';
-import { getCategoryBySubcategory, IOA_CATEGORIES } from '../utils/constants';
+import { IOA_CATEGORIES } from '../utils/constants';
 
 /**
  * Maps a CSV category string to an IOA category
- * CSV format examples:
- * - "3.c – Compensation and Benefits"
- * - "2.k – Disciplinary and Code of Conduct Issues"
- * - "4.b – Promotion"
+ * New CSV format examples:
+ * - "Medical Benefits"
+ * - "Contract Conversion and Promotions"
+ * - "Appointment and Position Alterations"
  */
 export const mapCsvCategoryToIOA = (csvCategory: string): IOACategory => {
-  // Extract the subcategory prefix (e.g., "3.c" from "3.c – Compensation and Benefits")
-  const match = csvCategory.match(/^([\d]+\.[a-z])/i);
-
-  if (match) {
-    const subcategory = match[1];
-
-    // Try to find matching IOA category by subcategory
-    const category = getCategoryBySubcategory(subcategory);
-    if (category) {
-      return category;
-    }
+  if (!csvCategory) {
+    return IOA_CATEGORIES[2]; // Default to Evaluative Relationships
   }
 
-  // Fallback: Use fuzzy matching on the description
+  // Use fuzzy matching on the category name
   return fuzzyMatchCategory(csvCategory);
 };
 
 /**
- * Fuzzy matching fallback for categories that don't match subcategories
+ * Fuzzy matching for new CSV category format
  */
 const fuzzyMatchCategory = (csvCategory: string): IOACategory => {
   const lowerCategory = csvCategory.toLowerCase();
 
-  // Check for keyword matches
-  if (lowerCategory.includes('compensation') || lowerCategory.includes('benefit')) {
-    return IOA_CATEGORIES[1]; // Compensation & Benefits
+  // 1. Compensation & Benefits
+  if (lowerCategory.includes('compensation') || lowerCategory.includes('pension') ||
+      lowerCategory.includes('plan adjust') || lowerCategory.includes('general benefit')) {
+    return IOA_CATEGORIES[1];
   }
 
-  if (lowerCategory.includes('disciplinary') || lowerCategory.includes('code of conduct')) {
-    return IOA_CATEGORIES[9]; // Values, Ethics, Standards
+  // 6. Safety, Health, and Physical Environment (check before general "benefits")
+  if (lowerCategory.includes('medical') || lowerCategory.includes('health') ||
+      lowerCategory.includes('safety') || lowerCategory.includes('disability')) {
+    return IOA_CATEGORIES[6];
   }
 
+  // 9. Values, Ethics, and Standards
+  if (lowerCategory.includes('misconduct') || lowerCategory.includes('disciplinary') ||
+      lowerCategory.includes('code of conduct') || lowerCategory.includes('ethics')) {
+    return IOA_CATEGORIES[9];
+  }
+
+  // 4. Career Progression and Development
+  if (lowerCategory.includes('promotion') || lowerCategory.includes('appointment') ||
+      lowerCategory.includes('contract conversion') || lowerCategory.includes('recruitment') ||
+      lowerCategory.includes('career') || lowerCategory.includes('position alter')) {
+    return IOA_CATEGORIES[4];
+  }
+
+  // 2. Evaluative Relationships
   if (lowerCategory.includes('performance') || lowerCategory.includes('appraisal') ||
-      lowerCategory.includes('grading') || lowerCategory.includes('retaliation')) {
-    return IOA_CATEGORIES[2]; // Evaluative Relationships
+      lowerCategory.includes('grading') || lowerCategory.includes('retaliation') ||
+      lowerCategory.includes('terms and conditions') || lowerCategory.includes('employment')) {
+    return IOA_CATEGORIES[2];
   }
 
-  if (lowerCategory.includes('promotion') || lowerCategory.includes('career') ||
-      lowerCategory.includes('recruitment')) {
-    return IOA_CATEGORIES[4]; // Career Progression
-  }
-
-  if (lowerCategory.includes('terms and conditions') || lowerCategory.includes('employment')) {
-    return IOA_CATEGORIES[2]; // Evaluative Relationships
-  }
-
+  // 5. Legal, Regulatory, Financial and Compliance
   if (lowerCategory.includes('legal') || lowerCategory.includes('compliance') ||
-      lowerCategory.includes('discrimination') || lowerCategory.includes('harassment')) {
-    return IOA_CATEGORIES[5]; // Legal, Regulatory, Financial
+      lowerCategory.includes('discrimination') || lowerCategory.includes('harassment') ||
+      lowerCategory.includes('fraud')) {
+    return IOA_CATEGORIES[5];
   }
 
-  if (lowerCategory.includes('safety') || lowerCategory.includes('health')) {
-    return IOA_CATEGORIES[6]; // Safety, Health
+  // 7. Services/Administrative Issues
+  if (lowerCategory.includes('service') || lowerCategory.includes('administrative') ||
+      lowerCategory.includes('requisition') || lowerCategory.includes('objection')) {
+    return IOA_CATEGORIES[7];
   }
 
-  if (lowerCategory.includes('service') || lowerCategory.includes('administrative')) {
-    return IOA_CATEGORIES[7]; // Services/Administrative
-  }
-
+  // 8. Organizational, Strategic, and Mission Related
   if (lowerCategory.includes('organizational') || lowerCategory.includes('strategic') ||
-      lowerCategory.includes('reorganization')) {
-    return IOA_CATEGORIES[8]; // Organizational
+      lowerCategory.includes('reorganization') || lowerCategory.includes('mapping')) {
+    return IOA_CATEGORIES[8];
   }
 
   // Default to Evaluative Relationships if no match found

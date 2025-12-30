@@ -1,6 +1,6 @@
 # Ombudsman AI Assistant
 
-An intelligent React application that analyzes World Bank Administrative Tribunal cases, classifies them into 9 IOA (International Ombudsman Association) categories, provides insights and visualizations, and offers AI-powered chat for personalized advice.
+This application analyzes and classifies tribunal cases from the Administrative Tribunal of multilateral organization using the International Ombudsman Association's (IOA) uniform reporting categories. The AI-powered assistant helps you explore case patterns, understand outcomes, and gain insights from documented tribunal decisions.
 
 ## Features
 
@@ -10,7 +10,7 @@ An intelligent React application that analyzes World Bank Administrative Tribuna
   - Key lessons learned from cases
   - Complete case listings with details
 - **AI Chat Assistant**: Ask questions about cases, patterns, and get personalized advice using OpenAI GPT
-- **199 Tribunal Cases**: Complete database of World Bank Administrative Tribunal cases
+- **664 Tribunal Cases**: Complete database of World Bank Administrative Tribunal cases with detailed metadata
 - **Responsive Design**: Works seamlessly on desktop, tablet, and mobile devices
 
 ## 9 IOA Categories
@@ -127,13 +127,18 @@ vercel
 
 ## Data Source
 
-The application analyzes 199 cases from the World Bank Administrative Tribunal. Each case includes:
+The application analyzes 664 cases from the World Bank Administrative Tribunal. Each case includes:
 - Case number
 - Applicant's claim
 - Tribunal decision
 - Lessons learned
 - IOA category classification
 - Ruling outcome (Applicant/Bank/Partially Applicant)
+- Decision and application dates
+- AT justification
+- Links to judgment/order and summary documents
+- Case study suitability indicator
+- Number of submissions
 
 ## AI Chat Features
 

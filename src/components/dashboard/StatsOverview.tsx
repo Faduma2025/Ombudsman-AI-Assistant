@@ -32,7 +32,7 @@ export const StatsOverview: React.FC = () => {
 
       <Card>
         <div className="text-center">
-          <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Applicant Favorable</p>
+          <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Staff Favorable</p>
           <p className="text-3xl font-bold text-green-600 mt-2">{stats.applicantWins + stats.partialWins}</p>
           <p className="text-xs text-gray-500 mt-1">{stats.applicantWinRate}% (Full + Partial)</p>
         </div>
@@ -40,7 +40,7 @@ export const StatsOverview: React.FC = () => {
 
       <Card>
         <div className="text-center">
-          <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Bank Wins</p>
+          <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Institution Favorable</p>
           <p className="text-3xl font-bold text-red-600 mt-2">{stats.bankWins}</p>
           <p className="text-xs text-gray-500 mt-1">{stats.bankWinRate}%</p>
         </div>
@@ -53,7 +53,7 @@ export const StatsOverview: React.FC = () => {
             <div className="flex justify-between items-center">
               <span className="flex items-center">
                 <span className="w-3 h-3 bg-green-500 rounded-full mr-2"></span>
-                Full Applicant:
+                In Favor of staff:
               </span>
               <span className="font-semibold">{stats.applicantWins}</span>
             </div>
@@ -67,7 +67,7 @@ export const StatsOverview: React.FC = () => {
             <div className="flex justify-between items-center">
               <span className="flex items-center">
                 <span className="w-3 h-3 bg-red-500 rounded-full mr-2"></span>
-                Bank:
+                In Favor of the Institution:
               </span>
               <span className="font-semibold">{stats.bankWins}</span>
             </div>

@@ -36,8 +36,8 @@ export const CategoryDetail: React.FC = () => {
   const pieData = useMemo(() => {
     if (!stats) return [];
     return [
-      { name: 'Applicant Wins', value: stats.applicantWins, color: '#10B981' },
-      { name: 'Bank Wins', value: stats.bankWins, color: '#EF4444' },
+      { name: 'Staff Wins', value: stats.applicantWins, color: '#10B981' },
+      { name: 'Institution Wins', value: stats.bankWins, color: '#EF4444' },
       { name: 'Partial Wins', value: stats.partialWins, color: '#F59E0B' }
     ];
   }, [stats]);
@@ -153,13 +153,13 @@ export const CategoryDetail: React.FC = () => {
               <p className="text-xl font-bold text-gray-900 dark:text-white">{stats.totalCases}</p>
             </div>
             <div className="flex justify-between items-center">
-              <p className="text-xs text-gray-600 dark:text-gray-400">Applicant</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400">Staff</p>
               <p className="text-xl font-bold text-green-600">
                 {stats.totalCases > 0 ? ((stats.applicantWins + stats.partialWins) / stats.totalCases * 100).toFixed(0) : 0}%
               </p>
             </div>
             <div className="flex justify-between items-center">
-              <p className="text-xs text-gray-600 dark:text-gray-400">Bank</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400">Institution</p>
               <p className="text-xl font-bold text-red-600">
                 {stats.totalCases > 0 ? (stats.bankWins / stats.totalCases * 100).toFixed(0) : 0}%
               </p>

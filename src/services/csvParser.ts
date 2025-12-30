@@ -3,12 +3,19 @@ import { TribunalCase, RulingType } from '../types/case';
 import { mapCsvCategoryToIOA } from './categoryMapper';
 
 interface CsvRow {
-  'Case No.': string;
-  'Claim of the Applicant': string;
-  'Decision': string;
-  'Lessons Learned': string;
-  'IOA Category': string;
-  'Ruling in Favor of': string;
+  'Case #': string;
+  'The Claim': string;
+  'Decsions': string;
+  'Lessons learned': string;
+  'Category': string;
+  'Who Lost?': string;
+  'Decision Date ': string;
+  'Date of Final Decsion ': string;
+  'AT Justification': string;
+  'Link to Judgment/Order': string;
+  'Link to Summary': string;
+  'Suitable for Case Study?': string;
+  'Number of submission ': string;
 }
 
 /**
@@ -32,7 +39,19 @@ const cleanText = (text: string): string => {
 export const parseTribunalCases = async (): Promise<TribunalCase[]> => {
   try {
     const response = await fetch('/data/tribunal-cases.csv');
-    const csvText = await response.text();
+    let csvText = await response.text();
+
+    // Remove BOM if present
+    if (csvText.charCodeAt(0) === 0xFEFF) {
+      csvText = csvText.substring(1);
+    }
+
+    // Split into lines and remove the first metadata row
+    const lines = csvText.split('\n');
+    if (lines.length > 0 && lines[0].includes('Cases')) {
+      lines.shift(); // Remove metadata row
+    }
+    csvText = lines.join('\n');
 
     return new Promise((resolve, reject) => {
       Papa.parse<CsvRow>(csvText, {
@@ -40,19 +59,26 @@ export const parseTribunalCases = async (): Promise<TribunalCase[]> => {
         skipEmptyLines: true,
         complete: (results) => {
           const cases: TribunalCase[] = results.data
-            .filter(row => row['Case No.'] && row['Case No.'].trim() !== '')
+            .filter(row => row['Case #'] && row['Case #'].trim() !== '')
             .map(row => {
-              const csvCategory = row['IOA Category'];
+              const csvCategory = row['Category'] || '';
               const ioaCategory = mapCsvCategoryToIOA(csvCategory);
 
               return {
-                caseNo: cleanText(row['Case No.']),
-                claim: cleanText(row['Claim of the Applicant']),
-                decision: cleanText(row['Decision']),
-                lessonsLearned: cleanText(row['Lessons Learned']),
+                caseNo: cleanText(row['Case #']),
+                claim: cleanText(row['The Claim']),
+                decision: cleanText(row['Decsions']),
+                lessonsLearned: cleanText(row['Lessons learned']),
                 csvCategory: csvCategory,
                 ioaCategory: ioaCategory,
-                rulingInFavorOf: normalizeRuling(row['Ruling in Favor of'])
+                rulingInFavorOf: normalizeRulingFromWhoLost(row['Who Lost?']),
+                decisionDate: cleanText(row['Decision Date ']),
+                applicationDate: cleanText(row['Date of Final Decsion ']),
+                atJustification: cleanText(row['AT Justification']),
+                linkToJudgment: cleanText(row['Link to Judgment/Order']),
+                linkToSummary: cleanText(row['Link to Summary']),
+                suitableForCaseStudy: cleanText(row['Suitable for Case Study?']),
+                numberOfSubmission: cleanText(row['Number of submission '])
               };
             });
 
@@ -70,16 +96,28 @@ export const parseTribunalCases = async (): Promise<TribunalCase[]> => {
 };
 
 /**
- * Normalizes ruling strings to standard types
+ * Normalizes ruling from "Who Lost?" field to standard ruling types
+ * Note: "Who Lost?" has inverse logic - if Bank lost, ruling is in favor of Applicant
  */
-const normalizeRuling = (ruling: string): RulingType => {
-  const normalized = ruling.trim();
+const normalizeRulingFromWhoLost = (whoLost: string): RulingType => {
+  if (!whoLost) {
+    return 'Bank'; // Default
+  }
 
-  if (normalized.includes('Applicant') && !normalized.includes('Partially')) {
+  const normalized = whoLost.trim().toLowerCase();
+
+  // If Bank lost, then Applicant won
+  if (normalized === 'bank') {
     return 'Applicant';
   }
 
-  if (normalized.includes('Partially')) {
+  // If Applicant lost, then Bank won
+  if (normalized === 'applicant') {
+    return 'Bank';
+  }
+
+  // Handle partial wins
+  if (normalized.includes('partial') || normalized.includes('both')) {
     return 'Partially Applicant';
   }
 

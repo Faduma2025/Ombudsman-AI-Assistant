@@ -10,6 +10,14 @@ export interface TribunalCase {
   csvCategory: string; // Original category from CSV
   ioaCategory: IOACategory; // Mapped IOA category
   rulingInFavorOf: RulingType;
+  // New additional fields from updated CSV
+  decisionDate?: string;
+  applicationDate?: string;
+  atJustification?: string;
+  linkToJudgment?: string;
+  linkToSummary?: string;
+  suitableForCaseStudy?: string;
+  numberOfSubmission?: string;
 }
 
 export interface CaseFilters {

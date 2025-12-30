@@ -56,8 +56,8 @@ export const CategoryCard: React.FC<CategoryCardProps> = ({ stats }) => {
         </div>
 
         <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400">
-          <span>Applicant: {applicantWins + partialWins}</span>
-          <span>Bank: {bankWins}</span>
+          <span>Staff: {applicantWins + partialWins}</span>
+          <span>Institution: {bankWins}</span>
         </div>
       </div>
     </Card>
