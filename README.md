@@ -15,15 +15,15 @@ This application analyzes and classifies tribunal cases from the Administrative 
 
 ## 9 IOA Categories
 
-1. **Compensation & Benefits** - Salary, benefits, and financial compensation issues
-2. **Evaluative Relationships** - Performance evaluations and supervisor relationships
-3. **Peer and Colleague Relationships** - Workplace relationships and peer interactions
-4. **Career Progression and Development** - Promotions and career advancement
-5. **Legal, Regulatory, Financial and Compliance** - Legal matters and regulatory compliance
-6. **Safety, Health, and Physical Environment** - Workplace safety and health concerns
-7. **Services/Administrative Issues** - Administrative processes and services
-8. **Organizational, Strategic, and Mission Related** - Strategic decisions and organizational changes
-9. **Values, Ethics, and Standards** - Ethical standards and code of conduct
+- **Compensation & Benefits** - Salary, benefits, and financial compensation issues
+- **Evaluative Relationships** - Performance evaluations and supervisor relationships
+- **Peer and Colleague Relationships** - Workplace relationships and peer interactions
+- **Career Progression and Development** - Promotions and career advancement
+- **Legal, Regulatory, Financial and Compliance** - Legal matters and regulatory compliance
+- **Safety, Health, and Physical Environment** - Workplace safety and health concerns
+- **Services/Administrative Issues** - Administrative processes and services
+- **Organizational, Strategic, and Mission Related** - Strategic decisions and organizational changes
+- **Values, Ethics, and Standards** - Ethical standards and code of conduct
 
 ## Tech Stack
 
