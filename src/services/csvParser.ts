@@ -5,7 +5,7 @@ import { mapCsvCategoryToIOA } from './categoryMapper';
 interface CsvRow {
   'Case #': string;
   'Name ': string;
-  'The Claim': string;
+  'The Claim ': string;
   'Decsions': string;
   'Lessons learned': string;
   'Category': string;
@@ -63,7 +63,7 @@ export const parseTribunalCases = async (): Promise<TribunalCase[]> => {
             .filter(row => row['Case #'] && row['Case #'].trim() !== '')
             .map(row => {
               const csvCategory = row['Category'] || '';
-              const claim = cleanText(row['The Claim']);
+              const claim = cleanText(row['The Claim ']);
               const ioaCategory = mapCsvCategoryToIOA(csvCategory, claim);
 
               return {
