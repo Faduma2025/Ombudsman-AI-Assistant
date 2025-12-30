@@ -64,6 +64,40 @@ export const useChat = (props?: UseChatProps) => {
 
       const relevantCases = props?.cases ? filterRelevantCases(content, props.cases) : [];
 
+      // Compute statistics from ALL filtered cases (before limiting to 20)
+      const allFilteredCases = props?.cases ? (() => {
+        const lowerQuestion = content.toLowerCase();
+        const keywords = [
+          'compensation', 'benefits', 'pension', 'salary', 'pay',
+          'promotion', 'career', 'development',
+          'discrimination', 'harassment', 'retaliation',
+          'performance', 'evaluation', 'appraisal',
+          'disciplinary', 'misconduct', 'termination',
+          'contract', 'renewal', 'employment'
+        ];
+
+        const matchedKeywords = keywords.filter(kw => lowerQuestion.includes(kw));
+
+        if (matchedKeywords.length > 0) {
+          return props.cases.filter(c => {
+            const caseText = `${c.claim} ${c.decision} ${c.lessonsLearned} ${c.csvCategory}`.toLowerCase();
+            return matchedKeywords.some(kw => caseText.includes(kw));
+          });
+        }
+        return props.cases;
+      })() : [];
+
+      // Compute statistics from ALL filtered cases
+      const caseStatistics = {
+        totalCases: allFilteredCases.length,
+        fullyUpheld: allFilteredCases.filter(c => c.rulingInFavorOf === 'Applicant').length,
+        partiallyUpheld: allFilteredCases.filter(c => c.rulingInFavorOf === 'Partially Applicant').length,
+        dismissed: allFilteredCases.filter(c => c.rulingInFavorOf === 'Bank').length,
+        staffWins: allFilteredCases.filter(c => c.rulingInFavorOf === 'Applicant').length,
+        institutionWins: allFilteredCases.filter(c => c.rulingInFavorOf === 'Bank').length,
+        partialWins: allFilteredCases.filter(c => c.rulingInFavorOf === 'Partially Applicant').length
+      };
+
       // Include conversation history for context
       const conversationHistory = messages.map(msg => ({
         role: msg.role,
@@ -73,7 +107,8 @@ export const useChat = (props?: UseChatProps) => {
       const request: ChatRequest = {
         message: content,
         conversationHistory,
-        casesData: relevantCases
+        casesData: relevantCases, // Sample of 20 cases for examples
+        caseStatistics // Statistics from ALL filtered cases
       };
 
       const response = await fetch('/api/chat', {

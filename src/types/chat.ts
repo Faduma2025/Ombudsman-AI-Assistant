@@ -11,6 +11,16 @@ export interface ChatContext {
   relevantCases?: string[];
 }
 
+export interface CaseStatistics {
+  totalCases: number;
+  fullyUpheld: number;
+  partiallyUpheld: number;
+  dismissed: number;
+  staffWins: number;
+  institutionWins: number;
+  partialWins: number;
+}
+
 export interface ChatRequest {
   message: string;
   context?: ChatContext;
@@ -18,7 +28,8 @@ export interface ChatRequest {
     role: 'user' | 'assistant';
     content: string;
   }>;
-  casesData?: any[]; // Tribunal cases data for AI context
+  casesData?: any[]; // Sample cases for examples (max 20)
+  caseStatistics?: CaseStatistics; // Accurate statistics from ALL filtered cases
 }
 
 export interface ChatResponse {

@@ -11,16 +11,34 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
-    const { message, casesData, conversationHistory = [] } = req.body;
+    const { message, casesData, caseStatistics, conversationHistory = [] } = req.body;
 
     if (!message) {
       return res.status(400).json({ error: 'Message is required' });
     }
 
+    // Format statistics from ALL filtered cases
+    let statisticsContext = '';
+    if (caseStatistics && caseStatistics.totalCases > 0) {
+      const fullyUpheldPercent = ((caseStatistics.fullyUpheld / caseStatistics.totalCases) * 100).toFixed(0);
+      const partiallyUpheldPercent = ((caseStatistics.partiallyUpheld / caseStatistics.totalCases) * 100).toFixed(0);
+      const dismissedPercent = ((caseStatistics.dismissed / caseStatistics.totalCases) * 100).toFixed(0);
+
+      statisticsContext = `\n\nIMPORTANT - ACCURATE STATISTICS FROM ALL ${caseStatistics.totalCases} RELEVANT CASES:
+You MUST use these exact statistics in your response. These are computed from ALL ${caseStatistics.totalCases} relevant tribunal cases, not a sample.
+
+Outcome Statistics:
+- Claims fully upheld (In Favor of Staff): ${caseStatistics.fullyUpheld} cases (${fullyUpheldPercent}%)
+- Partially upheld: ${caseStatistics.partiallyUpheld} cases (${partiallyUpheldPercent}%)
+- Claims dismissed (In Favor of Institution): ${caseStatistics.dismissed} cases (${dismissedPercent}%)
+
+When providing statistics in your response, use EXACTLY these numbers. Do not make up or estimate statistics.\n\n`;
+    }
+
     // Format cases data for AI context (truncated to save tokens)
     let casesContext = '';
     if (casesData && Array.isArray(casesData) && casesData.length > 0) {
-      casesContext = `\n\nYou have access to ${casesData.length} relevant tribunal cases:\n\n`;
+      casesContext = `You have access to ${casesData.length} sample cases for reference and examples:\n\n`;
       casesData.forEach((c: any) => {
         // Truncate long text to save tokens
         const truncate = (text: string, maxLength: number = 150) =>
@@ -77,7 +95,7 @@ IMPORTANT: Always structure your responses using this exact format:
 
 **Insights on [simple topic name]**
 
-Based on analysis of [X] tribunal cases, here's what you should know:
+Based on analysis of ALL relevant tribunal cases, here's what you should know:
 
 **Key Finding:**
 [Must include specific statistics and percentages. Example: "The Tribunal generally upholds institutional decisions in these matters (89% dismissed). Success typically requires strong evidence of procedural violations or policy breaches." Never use generic statements like "these issues are complex".]
@@ -123,7 +141,7 @@ IMPORTANT: When asked about general concerns (like "will I be viewed as a troubl
 - The importance of following proper procedures
 - The value of documentation and formal channels
 - Statistics showing that following proper processes is protected
-- Reassurance that legitimate concerns raised through appropriate channels are respected${casesContext}`;
+- Reassurance that legitimate concerns raised through appropriate channels are respected${statisticsContext}${casesContext}`;
 
     // Build messages array with conversation history
     const messages: Array<{ role: 'system' | 'user' | 'assistant'; content: string }> = [
