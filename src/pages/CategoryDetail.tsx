@@ -206,9 +206,22 @@ export const CategoryDetail: React.FC = () => {
               {case_.claim && case_.claim.trim() ? (
                 <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">
                   <span className="font-medium">Claim Summary:</span>{' '}
-                  {case_.claim.length > 200
-                    ? `${case_.claim.substring(0, 200)}...`
-                    : case_.claim}
+                  {(() => {
+                    const maxLength = 300;
+                    if (case_.claim.length <= maxLength) {
+                      return case_.claim;
+                    }
+                    // Find last complete sentence within maxLength
+                    const truncated = case_.claim.substring(0, maxLength);
+                    const lastPeriod = truncated.lastIndexOf('.');
+                    if (lastPeriod > 100) {
+                      // Found a sentence break, use it
+                      return case_.claim.substring(0, lastPeriod + 1) + '..';
+                    }
+                    // No sentence break, find last word boundary
+                    const lastSpace = truncated.lastIndexOf(' ');
+                    return case_.claim.substring(0, lastSpace) + '...';
+                  })()}
                 </p>
               ) : (
                 <p className="text-sm text-gray-500 dark:text-gray-500 mb-2 italic">
