@@ -26,8 +26,8 @@ export const Dashboard: React.FC = () => {
           <p className="text-sm text-gray-600 dark:text-gray-400 italic mb-2">
             Data Source: World Bank Administrative Tribunal | Classification: IOA Standards
           </p>
-          <p className="text-sm text-gray-600 dark:text-gray-400">
-            The information provided may not apply exactly to your situation, as individual circumstances vary. However, it may offer helpful guidance in determining the best course of action. Additional cases will be added over time.
+          <p className="text-xs text-gray-600 dark:text-gray-400">
+            <span className="font-semibold">Disclaimer:</span> The information provided may not apply exactly to your situation, as individual circumstances vary. However, it may offer helpful guidance in determining the best course of action. Additional cases will be added over time.
           </p>
         </div>
       </div>

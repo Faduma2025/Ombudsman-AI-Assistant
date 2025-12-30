@@ -36,9 +36,8 @@ export const CategoryDetail: React.FC = () => {
   const pieData = useMemo(() => {
     if (!stats) return [];
     return [
-      { name: 'Staff Wins', value: stats.applicantWins, color: '#10B981' },
-      { name: 'Institution Wins', value: stats.bankWins, color: '#EF4444' },
-      { name: 'Partial Wins', value: stats.partialWins, color: '#F59E0B' }
+      { name: 'Staff Favorable', value: stats.applicantWins + stats.partialWins, color: '#10B981' },
+      { name: 'Institution Favorable', value: stats.bankWins, color: '#EF4444' }
     ];
   }, [stats]);
 
