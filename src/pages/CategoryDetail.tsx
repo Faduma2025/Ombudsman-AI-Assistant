@@ -205,14 +205,24 @@ export const CategoryDetail: React.FC = () => {
                 <Badge ruling={case_.rulingInFavorOf} size="sm" />
               </div>
               <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">
-                <span className="font-medium">Claim Summary:</span> {case_.claim}
+                <span className="font-medium">Claim Summary:</span>{' '}
+                {case_.claim && case_.claim.length > 200
+                  ? `${case_.claim.substring(0, 200)}...`
+                  : case_.claim}
               </p>
-              <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
-                <span className="font-medium">Decision:</span> {case_.decision}
-              </p>
-              <p className="text-sm text-gray-500 dark:text-gray-500 italic">
-                <span className="font-medium">Lesson:</span> {case_.lessonsLearned}
-              </p>
+              {case_.decisionDate && (
+                <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                  <span className="font-medium">Decision Date:</span> {case_.decisionDate}
+                </p>
+              )}
+              <div className="text-sm text-gray-500 dark:text-gray-500">
+                <span className="font-medium">Lessons Learned:</span>
+                <ul className="list-disc list-inside mt-1 ml-2 space-y-1">
+                  {case_.lessonsLearned.split(/[.;]\s*/).filter(lesson => lesson.trim().length > 0).map((lesson, idx) => (
+                    <li key={idx} className="italic">{lesson.trim()}.</li>
+                  ))}
+                </ul>
+              </div>
             </div>
           ))}
         </div>
