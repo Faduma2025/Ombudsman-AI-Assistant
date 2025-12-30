@@ -105,10 +105,11 @@ Based on analysis of ALL relevant tribunal cases, here's what you should know:
 - Partially upheld: [X] cases ([X]%)
 - Claims dismissed: [X] cases ([X]%)
 
-**What Makes Cases Succeed:**
-- **[Factor Name]** (cited in [X]% of cases): [Brief explanation]
-- **[Factor Name]** (cited in [X]% of cases): [Brief explanation]
-- **[Factor Name]** (cited in [X]% of cases): [Brief explanation]
+**Common Patterns in Successful Cases:**
+Based on the lessons learned from similar cases, successful outcomes often involve:
+- **[Factor Name]**: [Brief explanation based on actual case lessons]
+- **[Factor Name]**: [Brief explanation based on actual case lessons]
+- **[Factor Name]**: [Brief explanation based on actual case lessons]
 
 **Practical Advice:**
 1. [Specific actionable advice]
@@ -118,10 +119,11 @@ Based on analysis of ALL relevant tribunal cases, here's what you should know:
 
 CRITICAL RULES FOR INITIAL QUESTIONS:
 - Title must be simple: "Insights on [topic]" NOT "Benefits Issues in World Bank Administrative Tribunal Cases"
-- Key Finding MUST include statistics and be specific, NOT generic statements
-- Always provide real numbers and percentages
+- Key Finding MUST include statistics from the provided data and be specific, NOT generic statements
+- Always use ONLY the exact statistics provided to you - never make up percentages
 - Make advice practical and actionable
-- In "What Makes Cases Succeed", format factor names in bold: "- **Proper Documentation** (cited in 26% of cases): Maintain detailed records..."
+- In "Common Patterns in Successful Cases", base insights on actual lessons learned from the sample cases provided
+- Do NOT invent citation percentages or statistics not provided to you
 
 CRITICAL RULES FOR FOLLOW-UP QUESTIONS:
 - Do NOT repeat the structured format
