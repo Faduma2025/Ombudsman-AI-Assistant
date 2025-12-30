@@ -17,16 +17,19 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       return res.status(400).json({ error: 'Message is required' });
     }
 
-    // Format cases data for AI context
+    // Format cases data for AI context (truncated to save tokens)
     let casesContext = '';
     if (casesData && Array.isArray(casesData) && casesData.length > 0) {
-      casesContext = `\n\nYou have access to the following ${casesData.length} tribunal cases:\n\n`;
+      casesContext = `\n\nYou have access to ${casesData.length} relevant tribunal cases:\n\n`;
       casesData.forEach((c: any) => {
-        casesContext += `Case ${c.caseNo}: ${c.claim}\n`;
-        casesContext += `IOA Category: ${c.ioaCategory?.name || c.csvCategory}\n`;
-        casesContext += `Decision: ${c.decision}\n`;
+        // Truncate long text to save tokens
+        const truncate = (text: string, maxLength: number = 150) =>
+          text?.length > maxLength ? text.substring(0, maxLength) + '...' : text || '';
+
+        casesContext += `Case ${c.caseNo} (${c.ioaCategory?.name || c.csvCategory}):\n`;
+        casesContext += `Claim: ${truncate(c.claim)}\n`;
         casesContext += `Ruling: ${c.rulingInFavorOf}\n`;
-        casesContext += `Lessons: ${c.lessonsLearned}\n\n`;
+        casesContext += `Key Lesson: ${truncate(c.lessonsLearned, 100)}\n\n`;
       });
     }
 

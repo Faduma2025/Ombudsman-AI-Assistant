@@ -30,6 +30,7 @@ export const useChat = (props?: UseChatProps) => {
       // Filter cases based on the question to reduce token usage
       const filterRelevantCases = (question: string, allCases: TribunalCase[]) => {
         const lowerQuestion = question.toLowerCase();
+        const MAX_CASES = 20; // Limit to prevent token overflow
 
         // Keywords to filter cases
         const keywords = [
@@ -44,16 +45,21 @@ export const useChat = (props?: UseChatProps) => {
         // Check if question mentions specific categories
         const matchedKeywords = keywords.filter(kw => lowerQuestion.includes(kw));
 
-        // If specific keywords found, filter cases; otherwise send all (for general questions)
+        let filtered: TribunalCase[];
+
+        // If specific keywords found, filter cases
         if (matchedKeywords.length > 0) {
-          return allCases.filter(c => {
+          filtered = allCases.filter(c => {
             const caseText = `${c.claim} ${c.decision} ${c.lessonsLearned} ${c.csvCategory}`.toLowerCase();
             return matchedKeywords.some(kw => caseText.includes(kw));
           });
+        } else {
+          // For general questions, send a sample of diverse cases
+          filtered = allCases;
         }
 
-        // For general questions, send all cases
-        return allCases;
+        // Limit to MAX_CASES to prevent token overflow
+        return filtered.slice(0, MAX_CASES);
       };
 
       const relevantCases = props?.cases ? filterRelevantCases(content, props.cases) : [];
