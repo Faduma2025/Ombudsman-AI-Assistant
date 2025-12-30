@@ -79,7 +79,8 @@ export const useChat = (props?: UseChatProps) => {
       });
 
       if (!response.ok) {
-        throw new Error('Failed to get response from AI');
+        const errorData = await response.json();
+        throw new Error(errorData.details || errorData.error || 'Failed to get response from AI');
       }
 
       const data: ChatResponse = await response.json();
@@ -102,7 +103,7 @@ export const useChat = (props?: UseChatProps) => {
       const errorMessage: ChatMessage = {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
-        content: 'I apologize, but I encountered an error. Please make sure the OpenAI API is properly configured.',
+        content: `I apologize, but I encountered an error: ${err.message || 'Please make sure the OpenAI API is properly configured.'}`,
         timestamp: new Date()
       };
 
