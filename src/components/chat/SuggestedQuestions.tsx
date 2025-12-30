@@ -10,7 +10,7 @@ const SUGGESTED_QUESTIONS = [
   "My promotion was denied - how can I approach this?",
   "I believe I'm experiencing retaliation - what do past cases show?",
   "I'm dealing with a disciplinary action - what advice can you give?",
-  "How should I prepare my case for the tribunal?"
+  "How should I prepare my case to start a formal process?"
 ];
 
 export const SuggestedQuestions: React.FC<SuggestedQuestionsProps> = ({ onSelect }) => {
