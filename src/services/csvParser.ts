@@ -62,11 +62,12 @@ export const parseTribunalCases = async (): Promise<TribunalCase[]> => {
             .filter(row => row['Case #'] && row['Case #'].trim() !== '')
             .map(row => {
               const csvCategory = row['Category'] || '';
-              const ioaCategory = mapCsvCategoryToIOA(csvCategory);
+              const claim = cleanText(row['The Claim']);
+              const ioaCategory = mapCsvCategoryToIOA(csvCategory, claim);
 
               return {
                 caseNo: cleanText(row['Case #']),
-                claim: cleanText(row['The Claim']),
+                claim: claim,
                 decision: cleanText(row['Decsions']),
                 lessonsLearned: cleanText(row['Lessons learned']),
                 csvCategory: csvCategory,
