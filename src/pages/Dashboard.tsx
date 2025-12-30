@@ -23,8 +23,11 @@ export const Dashboard: React.FC = () => {
             The AI-powered assistant helps you explore case patterns, understand outcomes, and gain insights
             from documented tribunal decisions.
           </p>
-          <p className="text-sm text-gray-600 dark:text-gray-400 italic">
+          <p className="text-sm text-gray-600 dark:text-gray-400 italic mb-2">
             Data Source: World Bank Administrative Tribunal | Classification: IOA Standards
+          </p>
+          <p className="text-sm text-gray-600 dark:text-gray-400">
+            The information provided may not apply exactly to your situation, as individual circumstances vary. However, it may offer helpful guidance in determining the best course of action. Additional cases will be added over time.
           </p>
         </div>
       </div>
