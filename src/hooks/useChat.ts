@@ -32,29 +32,35 @@ export const useChat = (props?: UseChatProps) => {
         const lowerQuestion = question.toLowerCase();
         const MAX_CASES = 20; // Limit to prevent token overflow
 
-        // Keywords to filter cases
-        const keywords = [
-          'compensation', 'benefits', 'pension', 'salary', 'pay',
-          'promotion', 'career', 'development',
-          'discrimination', 'harassment', 'retaliation',
-          'performance', 'evaluation', 'appraisal',
-          'disciplinary', 'misconduct', 'termination',
-          'contract', 'renewal', 'employment'
-        ];
+        // Map question to IOA category (same logic as statistics)
+        let targetCategoryId: number | null = null;
 
-        // Check if question mentions specific categories
-        const matchedKeywords = keywords.filter(kw => lowerQuestion.includes(kw));
+        if (lowerQuestion.match(/\b(compensation|benefit|pension|salary|pay|allowance|severance)\b/i)) {
+          targetCategoryId = 1;
+        } else if (lowerQuestion.match(/\b(performance|evaluation|appraisal|evaluat|rating|supervisor|manager|work program|retaliation)\b/i)) {
+          targetCategoryId = 2;
+        } else if (lowerQuestion.match(/\b(peer|colleague|workplace relationship|coworker)\b/i)) {
+          targetCategoryId = 3;
+        } else if (lowerQuestion.match(/\b(promotion|career|recruitment|appointment|contract|hiring|non-selection)\b/i)) {
+          targetCategoryId = 4;
+        } else if (lowerQuestion.match(/\b(legal|compliance|discrimination|harassment|regulatory|fraud)\b/i)) {
+          targetCategoryId = 5;
+        } else if (lowerQuestion.match(/\b(safety|health|medical|disability|illness|injury)\b/i)) {
+          targetCategoryId = 6;
+        } else if (lowerQuestion.match(/\b(service|administrative|process|procedure|objection)\b/i)) {
+          targetCategoryId = 7;
+        } else if (lowerQuestion.match(/\b(organizational|strategic|restructur|reorganization|budget)\b/i)) {
+          targetCategoryId = 8;
+        } else if (lowerQuestion.match(/\b(ethics|misconduct|disciplinary|code of conduct)\b/i)) {
+          targetCategoryId = 9;
+        }
 
         let filtered: TribunalCase[];
 
-        // If specific keywords found, filter cases
-        if (matchedKeywords.length > 0) {
-          filtered = allCases.filter(c => {
-            const caseText = `${c.claim} ${c.decision} ${c.lessonsLearned} ${c.csvCategory}`.toLowerCase();
-            return matchedKeywords.some(kw => caseText.includes(kw));
-          });
+        // Filter by IOA category if matched
+        if (targetCategoryId !== null) {
+          filtered = allCases.filter(c => c.ioaCategory?.id === targetCategoryId);
         } else {
-          // For general questions, send a sample of diverse cases
           filtered = allCases;
         }
 
@@ -67,23 +73,52 @@ export const useChat = (props?: UseChatProps) => {
       // Compute statistics from ALL filtered cases (before limiting to 20)
       const allFilteredCases = props?.cases ? (() => {
         const lowerQuestion = content.toLowerCase();
-        const keywords = [
-          'compensation', 'benefits', 'pension', 'salary', 'pay',
-          'promotion', 'career', 'development',
-          'discrimination', 'harassment', 'retaliation',
-          'performance', 'evaluation', 'appraisal',
-          'disciplinary', 'misconduct', 'termination',
-          'contract', 'renewal', 'employment'
-        ];
 
-        const matchedKeywords = keywords.filter(kw => lowerQuestion.includes(kw));
+        // Map question to IOA category
+        let targetCategoryId: number | null = null;
 
-        if (matchedKeywords.length > 0) {
-          return props.cases.filter(c => {
-            const caseText = `${c.claim} ${c.decision} ${c.lessonsLearned} ${c.csvCategory}`.toLowerCase();
-            return matchedKeywords.some(kw => caseText.includes(kw));
-          });
+        // Category 1: Compensation & Benefits
+        if (lowerQuestion.match(/\b(compensation|benefit|pension|salary|pay|allowance|severance)\b/i)) {
+          targetCategoryId = 1;
         }
+        // Category 2: Evaluative Relationships - MOST IMPORTANT FOR EVALUATION QUESTIONS
+        else if (lowerQuestion.match(/\b(performance|evaluation|appraisal|evaluat|rating|supervisor|manager|work program|retaliation)\b/i)) {
+          targetCategoryId = 2;
+        }
+        // Category 3: Peer and Colleague Relationships
+        else if (lowerQuestion.match(/\b(peer|colleague|workplace relationship|coworker)\b/i)) {
+          targetCategoryId = 3;
+        }
+        // Category 4: Career Progression and Development
+        else if (lowerQuestion.match(/\b(promotion|career|recruitment|appointment|contract|hiring|non-selection)\b/i)) {
+          targetCategoryId = 4;
+        }
+        // Category 5: Legal, Regulatory, Financial and Compliance
+        else if (lowerQuestion.match(/\b(legal|compliance|discrimination|harassment|regulatory|fraud)\b/i)) {
+          targetCategoryId = 5;
+        }
+        // Category 6: Safety, Health, and Physical Environment
+        else if (lowerQuestion.match(/\b(safety|health|medical|disability|illness|injury)\b/i)) {
+          targetCategoryId = 6;
+        }
+        // Category 7: Services/Administrative Issues
+        else if (lowerQuestion.match(/\b(service|administrative|process|procedure|objection)\b/i)) {
+          targetCategoryId = 7;
+        }
+        // Category 8: Organizational, Strategic, and Mission Related
+        else if (lowerQuestion.match(/\b(organizational|strategic|restructur|reorganization|budget)\b/i)) {
+          targetCategoryId = 8;
+        }
+        // Category 9: Values, Ethics, and Standards
+        else if (lowerQuestion.match(/\b(ethics|misconduct|disciplinary|code of conduct)\b/i)) {
+          targetCategoryId = 9;
+        }
+
+        // Filter by IOA category if matched, otherwise use all cases
+        if (targetCategoryId !== null) {
+          return props.cases.filter(c => c.ioaCategory?.id === targetCategoryId);
+        }
+
         return props.cases;
       })() : [];
 
