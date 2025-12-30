@@ -205,13 +205,13 @@ export const CategoryDetail: React.FC = () => {
                 <Badge ruling={case_.rulingInFavorOf} size="sm" />
               </div>
               <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">
-                <span className="font-medium">Claim:</span> {case_.claim}
+                <span className="font-medium">Claim Summary:</span> {case_.claim}
               </p>
               <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
                 <span className="font-medium">Decision:</span> {case_.decision}
               </p>
               <p className="text-sm text-gray-500 dark:text-gray-500 italic">
-                Lesson: {case_.lessonsLearned}
+                <span className="font-medium">Lesson:</span> {case_.lessonsLearned}
               </p>
             </div>
           ))}
