@@ -29,14 +29,6 @@ export const CategoryCard: React.FC<CategoryCardProps> = ({ stats }) => {
             {category.description}
           </p>
         </div>
-        <div
-          className="w-12 h-12 rounded-lg flex items-center justify-center ml-4"
-          style={{ backgroundColor: `${category.color}20` }}
-        >
-          <span className="text-2xl font-bold" style={{ color: category.color }}>
-            {category.id}
-          </span>
-        </div>
       </div>
 
       <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">

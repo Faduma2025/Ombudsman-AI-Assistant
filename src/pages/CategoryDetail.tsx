@@ -72,14 +72,6 @@ export const CategoryDetail: React.FC = () => {
             </h1>
             <p className="text-gray-600 dark:text-gray-400">{category.description}</p>
           </div>
-          <div
-            className="w-16 h-16 rounded-lg flex items-center justify-center ml-6"
-            style={{ backgroundColor: `${category.color}20` }}
-          >
-            <span className="text-3xl font-bold" style={{ color: category.color }}>
-              {category.id}
-            </span>
-          </div>
         </div>
       </div>
 
