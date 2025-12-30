@@ -4,6 +4,7 @@ export type RulingType = 'Applicant' | 'Bank' | 'Partially Applicant';
 
 export interface TribunalCase {
   caseNo: string;
+  caseName?: string; // Case name for URL construction
   claim: string;
   decision: string;
   lessonsLearned: string;

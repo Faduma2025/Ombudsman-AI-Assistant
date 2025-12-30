@@ -189,9 +189,9 @@ export const CategoryDetail: React.FC = () => {
             >
               <div className="flex items-start justify-between mb-2">
                 <h4 className="font-semibold">
-                  {(case_.linkToJudgment || case_.linkToSummary) ? (
+                  {case_.caseName ? (
                     <a
-                      href={case_.linkToJudgment || case_.linkToSummary}
+                      href={`https://tribunal.worldbank.org/sites/default/files/judgments-orders/${encodeURIComponent(case_.caseName)} ${case_.caseNo}.pdf`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-blue-600 dark:text-blue-400 hover:underline"
