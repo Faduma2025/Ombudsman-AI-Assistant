@@ -188,8 +188,19 @@ export const CategoryDetail: React.FC = () => {
               style={{ borderLeftColor: category.color }}
             >
               <div className="flex items-start justify-between mb-2">
-                <h4 className="font-semibold text-gray-900 dark:text-white">
-                  Case #{case_.caseNo}
+                <h4 className="font-semibold">
+                  {(case_.linkToJudgment || case_.linkToSummary) ? (
+                    <a
+                      href={case_.linkToJudgment || case_.linkToSummary}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-600 dark:text-blue-400 hover:underline"
+                    >
+                      Case #{case_.caseNo}
+                    </a>
+                  ) : (
+                    <span className="text-gray-900 dark:text-white">Case #{case_.caseNo}</span>
+                  )}
                 </h4>
                 <Badge ruling={case_.rulingInFavorOf} size="sm" />
               </div>
@@ -199,33 +210,9 @@ export const CategoryDetail: React.FC = () => {
               <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
                 <span className="font-medium">Decision:</span> {case_.decision}
               </p>
-              <p className="text-sm text-gray-500 dark:text-gray-500 italic mb-2">
+              <p className="text-sm text-gray-500 dark:text-gray-500 italic">
                 Lesson: {case_.lessonsLearned}
               </p>
-              {(case_.linkToJudgment || case_.linkToSummary) && (
-                <div className="flex gap-3 text-xs">
-                  {case_.linkToJudgment && (
-                    <a
-                      href={case_.linkToJudgment}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-blue-600 dark:text-blue-400 hover:underline"
-                    >
-                      Judgment/Order →
-                    </a>
-                  )}
-                  {case_.linkToSummary && (
-                    <a
-                      href={case_.linkToSummary}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-blue-600 dark:text-blue-400 hover:underline"
-                    >
-                      Summary →
-                    </a>
-                  )}
-                </div>
-              )}
             </div>
           ))}
         </div>
