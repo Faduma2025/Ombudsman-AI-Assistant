@@ -199,9 +199,33 @@ export const CategoryDetail: React.FC = () => {
               <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
                 <span className="font-medium">Decision:</span> {case_.decision}
               </p>
-              <p className="text-sm text-gray-500 dark:text-gray-500 italic">
+              <p className="text-sm text-gray-500 dark:text-gray-500 italic mb-2">
                 Lesson: {case_.lessonsLearned}
               </p>
+              {(case_.linkToJudgment || case_.linkToSummary) && (
+                <div className="flex gap-3 text-xs">
+                  {case_.linkToJudgment && (
+                    <a
+                      href={case_.linkToJudgment}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-600 dark:text-blue-400 hover:underline"
+                    >
+                      Judgment/Order →
+                    </a>
+                  )}
+                  {case_.linkToSummary && (
+                    <a
+                      href={case_.linkToSummary}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-600 dark:text-blue-400 hover:underline"
+                    >
+                      Summary →
+                    </a>
+                  )}
+                </div>
+              )}
             </div>
           ))}
         </div>
