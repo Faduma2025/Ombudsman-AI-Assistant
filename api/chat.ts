@@ -17,8 +17,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       return res.status(400).json({ error: 'Message is required' });
     }
 
-    const isFollowUp = conversationHistory.length > 0;
-
     // Format cases data for AI context
     let casesContext = '';
     if (casesData && Array.isArray(casesData) && casesData.length > 0) {
