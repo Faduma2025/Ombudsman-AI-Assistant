@@ -59,13 +59,6 @@ export const StatsOverview: React.FC = () => {
             </div>
             <div className="flex justify-between items-center">
               <span className="flex items-center">
-                <span className="w-3 h-3 bg-yellow-500 rounded-full mr-2"></span>
-                Partial:
-              </span>
-              <span className="font-semibold">{stats.partialWins}</span>
-            </div>
-            <div className="flex justify-between items-center">
-              <span className="flex items-center">
                 <span className="w-3 h-3 bg-red-500 rounded-full mr-2"></span>
                 In Favor of the Institution:
               </span>
