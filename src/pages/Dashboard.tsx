@@ -19,7 +19,7 @@ export const Dashboard: React.FC = () => {
         </h1>
         <div className="bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-600 p-4 mb-6">
           <p className="text-gray-700 dark:text-gray-300 mb-2">
-            This application analyzes and classifies tribunal cases from the <strong>Administrative Tribunal of multilateral organization</strong> using the International Ombudsman Association's (IOA) uniform reporting categories.
+            This application analyzes and classifies tribunal cases from the Administrative Tribunal of multilateral organization using the International Ombudsman Association's (IOA) uniform reporting categories.
             The AI-powered assistant helps you explore case patterns, understand outcomes, and gain insights
             from documented tribunal decisions.
           </p>
