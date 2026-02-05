@@ -111,8 +111,7 @@ Based on the lessons learned from similar cases, successful outcomes often invol
 - **[Factor Name]**: [Brief explanation based on actual case lessons]
 - **[Factor Name]**: [Brief explanation based on actual case lessons]
 
-**Outcome Statistics:**
-Based on our knowledge base, the outcome statistics for similar cases are as follows:
+**Based on our knowledge base, the outcome statistics for similar cases are as follows:**
 - Claims fully upheld: [X] cases ([X]%)
 - Partially upheld: [X] cases ([X]%)
 - Claims dismissed: [X] cases ([X]%)
