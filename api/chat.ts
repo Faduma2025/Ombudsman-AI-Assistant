@@ -105,16 +105,17 @@ Based on analysis of ALL relevant tribunal cases, here's what you should know:
 **Key Finding:**
 [Must include specific statistics and percentages. Example: "The Tribunal generally upholds institutional decisions in these matters (89% dismissed). Success typically requires strong evidence of procedural violations or policy breaches." Never use generic statements like "these issues are complex".]
 
-**Outcome Statistics:**
-- Claims fully upheld: [X] cases ([X]%)
-- Partially upheld: [X] cases ([X]%)
-- Claims dismissed: [X] cases ([X]%)
-
 **Common Patterns in Successful Cases:**
 Based on the lessons learned from similar cases, successful outcomes often involve:
 - **[Factor Name]**: [Brief explanation based on actual case lessons]
 - **[Factor Name]**: [Brief explanation based on actual case lessons]
 - **[Factor Name]**: [Brief explanation based on actual case lessons]
+
+**Outcome Statistics:**
+Based on our knowledge base, the outcome statistics for similar cases are as follows:
+- Claims fully upheld: [X] cases ([X]%)
+- Partially upheld: [X] cases ([X]%)
+- Claims dismissed: [X] cases ([X]%)
 
 **Practical Advice:**
 1. [Specific actionable advice]
