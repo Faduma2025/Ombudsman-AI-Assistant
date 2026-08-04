@@ -1,0 +1,11 @@
+# Ignore all generated data files
+*
+
+# But keep directory structure
+!.gitignore
+!registry/.gitkeep
+!documents/.gitkeep
+!chunks/.gitkeep
+!embeddings/.gitkeep
+!index/.gitkeep
+!logs/.gitkeep
