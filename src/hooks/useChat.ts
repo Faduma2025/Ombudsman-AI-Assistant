@@ -145,8 +145,11 @@ export const useChat = (props?: UseChatProps) => {
         partialWins: allFilteredCases.filter(c => c.rulingInFavorOf === 'Partially Applicant').length
       };
 
-      // Include conversation history for context
-      const conversationHistory = messages.map(msg => ({
+      // Include conversation history for context (last 10 exchanges to prevent token overflow)
+      // This allows unlimited questions while keeping API requests manageable
+      const maxHistoryMessages = 20; // Last 10 user + 10 assistant messages
+      const recentMessages = messages.slice(-maxHistoryMessages);
+      const conversationHistory = recentMessages.map(msg => ({
         role: msg.role,
         content: msg.content
       }));
