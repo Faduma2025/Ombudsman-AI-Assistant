@@ -19,12 +19,13 @@ export const Dashboard: React.FC = () => {
         </h1>
         <div className="bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-600 p-4 mb-6">
           <p className="text-gray-700 dark:text-gray-300 mb-2">
-            This application analyzes and classifies tribunal cases from the Administrative Tribunal of multilateral organization using the International Ombudsman Association's (IOA) uniform reporting categories.
-            The AI-powered assistant helps you explore case patterns, understand outcomes, and gain insights
-            from documented tribunal decisions.
+            Explore administrative tribunal decisions across multilateral institutions using AI. Search cases, compare tribunal reasoning, identify recurring workplace issues, and derive practical lessons from documented decisions.
           </p>
           <p className="text-sm text-gray-600 dark:text-gray-400 italic mb-2">
-            Data Source: World Bank Administrative Tribunal | Classification: IOA Standards
+            Sources: World Bank Administrative Tribunal · IMF Administrative Tribunal
+          </p>
+          <p className="text-sm text-gray-600 dark:text-gray-400 italic mb-2">
+            Classification: IOA Uniform Reporting Categories
           </p>
           <p className="text-xs text-gray-600 dark:text-gray-400">
             <span className="font-semibold">Disclaimer:</span> The information provided may not apply exactly to your situation, as individual circumstances vary. However, it may offer helpful guidance in determining the best course of action. Additional cases will be added over time.
