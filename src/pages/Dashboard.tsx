@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StatsOverview } from '../components/dashboard/StatsOverview';
 import { CategoryCard } from '../components/dashboard/CategoryCard';
 import { useCategories } from '../hooks/useCategories';
 import { LoadingSpinner } from '../components/common/LoadingSpinner';
 
+type Institution = 'All Institutions' | 'World Bank' | 'IMF';
+
 export const Dashboard: React.FC = () => {
   const { categories, loading } = useCategories();
+  const [selectedInstitution, setSelectedInstitution] = useState<Institution>('All Institutions');
 
   if (loading) {
     return <LoadingSpinner size="lg" text="Loading tribunal cases..." />;
@@ -30,6 +33,35 @@ export const Dashboard: React.FC = () => {
           <p className="text-xs text-gray-600 dark:text-gray-400">
             <span className="font-semibold">Disclaimer:</span> The information provided may not apply exactly to your situation, as individual circumstances vary. However, it may offer helpful guidance in determining the best course of action. Additional cases will be added over time.
           </p>
+        </div>
+      </div>
+
+      <div className="mb-6">
+        <div className="flex items-center gap-3">
+          <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">
+            Institution:
+          </span>
+          <div className="inline-flex rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800">
+            {(['All Institutions', 'World Bank', 'IMF'] as Institution[]).map((institution) => (
+              <button
+                key={institution}
+                onClick={() => setSelectedInstitution(institution)}
+                className={`
+                  px-4 py-2 text-sm font-medium transition-colors
+                  ${institution === 'All Institutions' ? 'rounded-l-lg' : ''}
+                  ${institution === 'IMF' ? 'rounded-r-lg' : ''}
+                  ${institution !== 'All Institutions' && institution !== 'IMF' ? 'border-x border-gray-300 dark:border-gray-600' : ''}
+                  ${
+                    selectedInstitution === institution
+                      ? 'bg-blue-600 text-white'
+                      : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'
+                  }
+                `}
+              >
+                {institution}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 
