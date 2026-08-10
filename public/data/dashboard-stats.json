@@ -1,0 +1,29 @@
+{
+  "generated": "2026-08-10T19:48:34.050Z",
+  "institutions": {
+    "IMF": {
+      "totalCases": 86,
+      "staff_favorable_full": 11,
+      "staff_favorable_partial": 0,
+      "institution_favorable": 47,
+      "procedural": 4,
+      "unknown": 24
+    },
+    "World Bank": {
+      "totalCases": 1452,
+      "staff_favorable_full": 9,
+      "staff_favorable_partial": 0,
+      "institution_favorable": 15,
+      "procedural": 1,
+      "unknown": 1427
+    }
+  },
+  "overall": {
+    "totalCases": 1538,
+    "staff_favorable_full": 20,
+    "staff_favorable_partial": 0,
+    "institution_favorable": 62,
+    "procedural": 5,
+    "unknown": 1451
+  }
+}
